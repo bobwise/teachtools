@@ -292,7 +292,7 @@ body {
     align-items: stretch;
     justify-content: center;
     border: 2px solid #ccc;
-    background: var(--seat-bg);
+    background: #f0f0f0;
     border-radius: 6px;
     overflow: hidden;
     padding: 2px;
@@ -350,8 +350,8 @@ body {
     width: 100%;
     padding: 5px;
     margin-bottom: 12px;
-    background: #ffffff;
-    border: 2px solid #ccc;
+    background: #f6f6f6;
+    border: 1px solid #ccc;
     border-radius: 4px;
     font-weight: 600;
     font-size: 14px;
