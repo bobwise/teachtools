@@ -7,6 +7,7 @@ class TeamGenerator {
 		this.teams = [];
 		this.teamNames = {}; // Store custom team names
 		this.draggedFrom = null; // Track where member is dragged from
+		this.showLeaders = false; // Track if team leaders are enabled
 		this.setupEventListeners();
 	}
 
@@ -17,6 +18,17 @@ class TeamGenerator {
 		const modeRadios = document.querySelectorAll('input[name="teamMode"]');
 		const groupSizeInput = document.getElementById('groupSize');
 		const numGroupsInput = document.getElementById('numGroups');
+		const leadersCheckbox = document.getElementById('includeLeaders');
+
+		// Toggle leaders checkbox
+		if (leadersCheckbox) {
+			leadersCheckbox.addEventListener('change', (e) => {
+				this.showLeaders = e.target.checked;
+				if (this.teams.length > 0) {
+					this.displayTeams();
+				}
+			});
+		}
 
 		// Update inputs based on selected mode
 		modeRadios.forEach((radio) => {
@@ -313,7 +325,11 @@ class TeamGenerator {
 					<div class="team" style="background: linear-gradient(135deg, ${bgColor} 0%, rgba(0, 102, 204, 0.05) 100%)" data-team-drop="${index}">
 						<h4 class="team-name" data-team-index="${index}">${teamName}</h4>
 						<ul class="team-members">
-							${team.map((student, memberIndex) => `<li draggable="true" data-team="${index}" data-member="${memberIndex}">${student}</li>`).join('')}
+							${team.map((student, memberIndex) => {
+							const isLeader = this.showLeaders && memberIndex === 0;
+							const leaderClass = isLeader ? 'team-leader' : '';
+							return `<li draggable="true" data-team="${index}" data-member="${memberIndex}" class="${leaderClass}"><span class="member-name">${student}</span>${isLeader ? '<span class="leader-badge">👑</span>' : ''}</li>`;
+						}).join('')}
 						</ul>
 					</div>
 				`;

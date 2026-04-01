@@ -186,6 +186,9 @@
 	font-size: 0.95rem;
 	cursor: move;
 	transition: all 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .team-members li:hover {
@@ -199,6 +202,25 @@
 .team-members li.dragging {
 	opacity: 0.5;
 	background: #f5f5f5;
+}
+
+.team-members li.team-leader {
+	background: linear-gradient(135deg, #fff9e6 0%, #fffaf0 100%);
+	border-left-color: #ffc107;
+	font-weight: 500;
+}
+
+.team-members li.team-leader:hover {
+	box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+}
+
+.member-name {
+	flex: 1;
+}
+
+.leader-badge {
+	margin-left: 0.5rem;
+	font-size: 1.1rem;
 }
 
 .team.drag-over {
