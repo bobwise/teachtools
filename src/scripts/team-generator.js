@@ -56,8 +56,9 @@ class TeamGenerator {
 
 	parseStudents() {
 		const input = document.getElementById('studentNames').value;
+		// Split by both commas and newlines, filter empty entries
 		this.students = input
-			.split(',')
+			.split(/[,\n]/)
 			.map((name) => name.trim())
 			.filter((name) => name.length > 0);
 
