@@ -56,3 +56,7 @@ footer p {
 	color: #666;
 	margin: 0;
 }
+
+.hidden {
+    display: none;
+}
