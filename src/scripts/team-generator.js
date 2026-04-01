@@ -5,6 +5,8 @@ class TeamGenerator {
 	constructor() {
 		this.students = [];
 		this.teams = [];
+		this.teamNames = {}; // Store custom team names
+		this.draggedFrom = null; // Track where member is dragged from
 		this.setupEventListeners();
 	}
 
@@ -100,6 +102,7 @@ class TeamGenerator {
 
 		// Create teams
 		this.teams = [];
+		this.teamNames = {}; // Reset team names when generating new teams
 		if (mode === 'size') {
 			// Divide by group size
 			for (let i = 0; i < shuffled.length; i += groupSize) {
@@ -133,12 +136,142 @@ class TeamGenerator {
 		const groupSize = Math.ceil(shuffled.length / this.teams.length);
 
 		this.teams = [];
+		this.teamNames = {}; // Reset team names when shuffling
 		for (let i = 0; i < shuffled.length; i += groupSize) {
 			const team = shuffled.slice(i, i + groupSize);
 			this.teams.push(team);
 		}
 
 		this.displayTeams();
+	}
+
+	attachTeamNameEditors() {
+		const teamHeadings = document.querySelectorAll('.team-name');
+		teamHeadings.forEach((heading) => {
+			heading.addEventListener('click', (e) => {
+				if (e.target.tagName === 'INPUT') return; // Don't edit if already editing
+				const teamIndex = heading.dataset.teamIndex;
+				const currentName = heading.textContent;
+				
+				// Create input field
+				const input = document.createElement('input');
+				input.type = 'text';
+				input.value = currentName;
+				input.className = 'team-name-input';
+				
+				// Replace heading with input
+				heading.replaceWith(input);
+				input.focus();
+				input.select();
+				
+				const saveName = () => {
+					const newName = input.value.trim() || currentName;
+					this.teamNames[teamIndex] = newName;
+					
+					const newHeading = document.createElement('h4');
+					newHeading.className = 'team-name';
+					newHeading.dataset.teamIndex = teamIndex;
+					newHeading.textContent = newName;
+					
+					input.replaceWith(newHeading);
+					this.attachTeamNameEditors();
+				};
+				
+				const cancelEdit = () => {
+					const newHeading = document.createElement('h4');
+					newHeading.className = 'team-name';
+					newHeading.dataset.teamIndex = teamIndex;
+					newHeading.textContent = currentName;
+					
+					input.replaceWith(newHeading);
+					this.attachTeamNameEditors();
+				};
+				
+				input.addEventListener('blur', saveName);
+				input.addEventListener('keydown', (e) => {
+					if (e.key === 'Enter') saveName();
+					if (e.key === 'Escape') cancelEdit();
+				});
+			});
+		});
+	}
+
+	attachDragHandlers() {
+		const teamMembers = document.querySelectorAll('.team-members li');
+		const teams = document.querySelectorAll('[data-team-drop]');
+
+		// Handle member drag start
+		teamMembers.forEach((member) => {
+			member.addEventListener('dragstart', (e) => {
+				const teamIndex = parseInt(member.dataset.team);
+				const memberIndex = parseInt(member.dataset.member);
+				this.draggedFrom = { teamIndex, memberIndex };
+				e.dataTransfer.effectAllowed = 'move';
+				member.classList.add('dragging');
+			});
+
+			member.addEventListener('dragend', (e) => {
+				member.classList.remove('dragging');
+				teams.forEach((team) => team.classList.remove('drag-over'));
+			});
+		});
+
+		// Handle team drop zones
+		teams.forEach((team) => {
+			team.addEventListener('dragover', (e) => {
+				if (this.draggedFrom) {
+					e.preventDefault();
+					e.dataTransfer.dropEffect = 'move';
+					team.classList.add('drag-over');
+				}
+			});
+
+			team.addEventListener('dragleave', (e) => {
+				if (e.target === team) {
+					team.classList.remove('drag-over');
+				}
+			});
+
+			team.addEventListener('drop', (e) => {
+				e.preventDefault();
+				team.classList.remove('drag-over');
+
+				if (!this.draggedFrom) return;
+
+				const dropTeamIndex = parseInt(team.dataset.teamDrop);
+
+				// Find the member being dragged over (if any)
+				const memberList = team.querySelector('.team-members');
+				const memberElements = Array.from(memberList.querySelectorAll('li'));
+				let targetMemberIndex = memberElements.length;
+
+				// Find which member in the drop team to swap with
+				const dropTarget = e.target;
+				if (dropTarget.tagName === 'LI') {
+					targetMemberIndex = parseInt(dropTarget.dataset.member);
+				}
+
+				// Swap members
+				const fromTeam = this.teams[this.draggedFrom.teamIndex];
+				const fromMember = fromTeam[this.draggedFrom.memberIndex];
+
+				const toTeam = this.teams[dropTeamIndex];
+				const toMember = toTeam[targetMemberIndex];
+
+				// Swap
+				if (toMember !== undefined) {
+					fromTeam[this.draggedFrom.memberIndex] = toMember;
+					toTeam[targetMemberIndex] = fromMember;
+				} else {
+					// Drop at end of team
+					fromTeam[this.draggedFrom.memberIndex] = toTeam.pop();
+					toTeam.push(fromMember);
+				}
+
+				this.draggedFrom = null;
+				this.displayTeams();
+			});
+		});
 	}
 
 	shuffleArray(array) {
@@ -165,6 +298,7 @@ class TeamGenerator {
 		container.innerHTML = this.teams
 			.map((team, index) => {
 				const teamNum = index + 1;
+				const teamName = this.teamNames[index] || `Team ${teamNum}`;
 				const colors = [
 					'#e3f2fd',
 					'#f3e5f5',
@@ -176,10 +310,10 @@ class TeamGenerator {
 				const bgColor = colors[index % colors.length];
 
 				return `
-					<div class="team" style="background: linear-gradient(135deg, ${bgColor} 0%, rgba(0, 102, 204, 0.05) 100%)">
-						<h4>Team ${teamNum}</h4>
+					<div class="team" style="background: linear-gradient(135deg, ${bgColor} 0%, rgba(0, 102, 204, 0.05) 100%)" data-team-drop="${index}">
+						<h4 class="team-name" data-team-index="${index}">${teamName}</h4>
 						<ul class="team-members">
-							${team.map((student) => `<li>${student}</li>`).join('')}
+							${team.map((student, memberIndex) => `<li draggable="true" data-team="${index}" data-member="${memberIndex}">${student}</li>`).join('')}
 						</ul>
 					</div>
 				`;
@@ -188,6 +322,8 @@ class TeamGenerator {
 
 		wrapper.style.display = 'block';
 		this.clearMessages();
+		this.attachTeamNameEditors();
+		this.attachDragHandlers();
 	}
 
 	showError(message) {
