@@ -1,7 +1,91 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
+import '../styles/team-generator.css';
 ---
 
 <PageLayout title="Team Generator - TeachTools">
-    <div class="app">Coming soon...</div>
+	<div class="team-app">
+		<div class="team-panel">
+			<h2>Team Setup</h2>
+			
+			<label for="studentNames">Student Names</label>
+			<textarea
+				id="studentNames"
+				placeholder="Enter names separated by commas&#10;Example: Alice, Bob, Charlie, Diana..."
+			></textarea>
+			<p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">
+				<span id="studentCount">0 students</span>
+			</p>
+
+			<h3 style="font-size: 1rem; margin-bottom: 1rem;">Team Configuration</h3>
+			
+			<div class="radio-group">
+				<div class="radio-option">
+					<input
+						type="radio"
+						id="modeSize"
+						name="teamMode"
+						value="size"
+						checked
+					/>
+					<label for="modeSize">Group by Size</label>
+				</div>
+				<label for="groupSize" style="display: block; margin-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;">
+					Students per group:
+				</label>
+				<input
+					type="number"
+					id="groupSize"
+					min="1"
+					max="20"
+					value="3"
+					style="margin-left: 1.5rem;"
+				/>
+			</div>
+
+			<div class="radio-group">
+				<div class="radio-option">
+					<input
+						type="radio"
+						id="modeCount"
+						name="teamMode"
+						value="count"
+					/>
+					<label for="modeCount">Group by Count</label>
+				</div>
+				<label for="numGroups" style="display: block; margin-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;">
+					Number of groups:
+				</label>
+				<input
+					type="number"
+					id="numGroups"
+					min="1"
+					max="20"
+					value="3"
+					disabled
+					style="margin-left: 1.5rem;"
+				/>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" class="btn-primary" id="generateTeamsBtn">
+					Generate Teams
+				</button>
+				<button type="button" class="btn-secondary" id="shuffleBtn">
+					🔀 Shuffle
+				</button>
+			</div>
+		</div>
+
+		<div id="teamsWrapper" style="display: none;">
+			<div class="teams-wrapper">
+				<h3>Generated Teams</h3>
+				<div id="teamsContainer" class="teams-container">
+					<div class="empty-state">Generate teams to see results</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../scripts/team-generator.js"></script>
 </PageLayout>
