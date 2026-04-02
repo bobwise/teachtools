@@ -16,14 +16,29 @@ import "../styles/random-picker.css";
                         id="clear">Clear</button
                     >
                 </div>
-                <textarea
-                    id="names"
-                    placeholder="Alice
+                <textarea id="names" placeholder="Alice
 Bob
-Charlie..."></textarea>
+Charlie..."
+                ></textarea>
             </div>
 
             <div class="controls">
+                <div
+                    style="padding: 1rem; background: white; border-radius: 4px; width: 100%"
+                >
+                    <label
+                        for="includeLeaders"
+                        style="display: flex; align-items: center; cursor: pointer; margin: 0;"
+                    >
+                        <input
+                            type="checkbox"
+                            id="includeLeaders"
+                            style="margin-right: 0.75rem; cursor: pointer; width: 18px; height: 18px;"
+                        />
+                        <span>No repeats</span>
+                    </label>
+                </div>
+
                 <button type="button" class="btn-primary" id="generateTeamsBtn">
                     Pick Next
                 </button>
@@ -33,5 +48,5 @@ Charlie..."></textarea>
         <div id="pickerResult" class="panel hidden" role="main"></div>
     </div>
 
-    <!-- <script src="../scripts/seating-app.js"></script> -->
+    <script src="../scripts/random-picker.js"></script>
 </PageLayout>

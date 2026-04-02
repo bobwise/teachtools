@@ -22,11 +22,6 @@ textarea {
     font-size: 16px;
 }
 
-button:focus-visible {
-    outline: 2px solid var(--highlight);
-    outline-offset: 2px;
-}
-
 #clearContainer {
     display: inline-flex;
     justify-content: space-between;
@@ -37,6 +32,11 @@ button:focus-visible {
 .controls button[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+#pickerResult {
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 @media (max-width: 900px) {
