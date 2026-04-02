@@ -25,7 +25,7 @@
     --orange-light: #ffd4a3;
     --orange: #f0ad4e;
     --orange-medium: #ec971f;
-    --orange-dark: #d58512;
+    --orange-dark: #7a4700;
 
     /* Yellow Colors (lightest to darkest: faint, light, base, medium, dark) */
     --yellow-faint: #fffdf6;
@@ -53,7 +53,7 @@
     --pink-light: #f0b5d4;
     --pink: #e83e8c;
     --pink-medium: #d63384;
-    --pink-dark: #c2185b;
+    --pink-dark: #841340;
 }
 
 /* Global Reset & Base Styles */

@@ -196,7 +196,7 @@
 }
 
 .team:nth-child(6) h3 {
-    color: var(--pink);
+    color: var(--pink-dark);
 }
 
 .team:nth-child(6) .team-members li:not(.team-leader) {
@@ -380,7 +380,7 @@
 }
 
 .team:nth-child(8n+6) h3 {
-    color: var(--pink);
+    color: var(--pink-dark);
 }
 
 .team:nth-child(8n+6) .team-members li:not(.team-leader) {
