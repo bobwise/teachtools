@@ -125,28 +125,28 @@ main {
 
 /* Header Styles */
 header {
-    background-color: #f5f5f5;
-    padding: 1rem 0;
-    border-bottom: 1px solid #ddd;
+    border-radius: 0 !important;
+    padding: 0 !important;
 }
 
 nav {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
     display: flex;
-    gap: 2rem;
 }
 
 nav a {
     text-decoration: none;
     color: #333;
+    padding: 1.5rem 1.75rem;
     font-weight: 500;
     transition: color 0.2s;
 }
 
-nav a:hover {
-    color: #0066cc;
+nav a:hover, nav a:focus-visible {
+    color: var(--blue-dark);
+    text-decoration: underline;
+    background-color: #e3f3ff;
 }
 
 /* Footer Styles */
