@@ -14,7 +14,7 @@
     --primary-dark: var(--blue-dark);
 
     /* Red Colors (lightest to darkest: faint, light, base, medium, dark) */
-    --red-faint: #f8d7da;
+    --red-faint: #f8e4e5;
     --red-light: #f5c6cb;
     --red: #d9534f;
     --red-medium: #c9302c;
@@ -205,7 +205,7 @@ h1 {
     color: var(--blue-dark);
     background-color: var(--blue-faint);
 
-    h2 {
+    h2, h3 {
         color: var(--blue-dark);
     }
 }
@@ -222,11 +222,51 @@ h1 {
 
 .panel.panel-green {
     border: 1px solid var(--green);
-    color: var(--green-dark);
+    color: var(--green-dark); 
     background-color: var(--green-faint);
 
     h2 {
         color: var(--green-dark);
+    }
+}
+
+.panel.panel-purple {
+    border: 1px solid var(--purple);
+    color: var(--purple-dark);
+    background-color: var(--purple-faint);
+
+    h2 {
+        color: var(--purple-dark);
+    }
+}
+
+.panel.panel-pink {
+    border: 1px solid var(--pink);
+    color: var(--pink-dark);
+    background-color: var(--pink-faint);
+
+    h2 {
+        color: var(--pink-dark);
+    }
+}
+
+.panel.panel-yellow {
+    border: 1px solid var(--yellow);
+    color: var(--yellow-dark);
+    background-color: var(--yellow-faint);
+
+    h2 {
+        color: var(--yellow-dark);
+    }
+}
+
+.panel.panel-red {
+    border: 1px solid var(--red);
+    color: var(--red-dark);
+    background-color: var(--red-faint);
+
+    h2 {
+        color: var(--red-dark);
     }
 }
 

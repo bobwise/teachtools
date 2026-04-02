@@ -30,12 +30,12 @@ import PageLayout from "../layouts/PageLayout.astro";
 			<span class="card-link">Open tool</span>
 		</a>
 
-		<a class="tool-card panel panel-orange" href="/team-generator">
+		<a class="tool-card panel panel-yellow" href="/team-generator">
 			<p class="tool-tag">Group Activities</p>
 			<h2>Team Generator</h2>
 			<p>
 				Create balanced groups by team count or size, include leaders,
-				and shuffle instantly.
+				and shuffle instantly. Great for group projects, games, and field trips.
 			</p>
 			<span class="card-link">Open tool</span>
 		</a>
@@ -44,8 +44,8 @@ import PageLayout from "../layouts/PageLayout.astro";
 			<p class="tool-tag">Participation Support</p>
 			<h2>Random Name Picker</h2>
 			<p>
-				Pick students fairly with optional no-repeat mode so everyone
-				gets a turn before repeats.
+				Pick names from a list one at a time with optional no-repeat mode so everyone
+				gets picked before the list repeats.
 			</p>
 			<span class="card-link">Open tool</span>
 		</a>
@@ -54,23 +54,15 @@ import PageLayout from "../layouts/PageLayout.astro";
 	<section class="coming-soon" aria-label="Upcoming tools">
 		<h2>More Tools Coming Soon</h2>
 		<p>
-			TeachTools is growing. New free, no-login classroom tools are on the
-			way.
+			TeachTools is growing! New free, no-login classroom tools are on the
+			way!
 		</p>
 	</section>
 
 	<style>
 		.home-hero {
-			position: relative;
-			overflow: hidden;
-			margin-bottom: 2rem;
-			padding: 2.2rem 1.5rem;
-			border: 1px solid #d9e3e7;
-			border-radius: 16px;
-			background:
-				radial-gradient(circle at 10% 20%, #eff7ff 0%, transparent 40%),
-				radial-gradient(circle at 95% 80%, #fff2df 0%, transparent 35%),
-				linear-gradient(140deg, #ffffff 0%, #f7fbff 100%);
+			margin-bottom: 1.2rem;
+			padding-bottom: 1rem;
 		}
 
 		.hero-eyebrow {
@@ -79,18 +71,17 @@ import PageLayout from "../layouts/PageLayout.astro";
 			font-weight: 700;
 			letter-spacing: 0.06em;
 			text-transform: uppercase;
-			color: #1a4480;
+			color: var(--blue-dark);
 		}
 
 		.home-hero h1 {
 			margin: 0 0 0.75rem;
 			font-size: clamp(1.8rem, 3vw, 2.4rem);
 			line-height: 1.15;
-			color: #102a43;
+			color: var(--blue-dark);
 		}
 
 		.hero-lead {
-			max-width: 62ch;
 			margin: 0;
 			font-size: 1.05rem;
 			line-height: 1.55;
@@ -119,6 +110,7 @@ import PageLayout from "../layouts/PageLayout.astro";
 			display: flex;
 			flex-direction: column;
 			gap: 0.7rem;
+			height: 100%;
 			padding: 1.15rem;
 			border-radius: 14px;
 			text-decoration: none;
@@ -149,46 +141,22 @@ import PageLayout from "../layouts/PageLayout.astro";
 		}
 
 		.card-link {
-			margin-top: auto;
 			font-weight: 700;
-			color: #102a43;
-		}
-
-		.teams {
-			background: linear-gradient(160deg, #fff8f3 0%, #ffffff 65%);
-		}
-
-		.teams .tool-tag,
-		.teams h2 {
-			color: #7a4700;
-		}
-
-		.picker {
-			background: linear-gradient(160deg, #f4fff7 0%, #ffffff 65%);
-		}
-
-		.picker .tool-tag,
-		.picker h2 {
-			color: #255825;
 		}
 
 		.coming-soon {
 			margin-top: 1.2rem;
-			padding: 1rem 1.2rem;
-			border-left: 5px solid #005ea2;
-			background: #f4f8fc;
+			padding: 1rem 0;
 			border-radius: 8px;
 		}
 
 		.coming-soon h2 {
 			margin: 0 0 0.35rem;
 			font-size: 1.1rem;
-			color: #102a43;
 		}
 
 		.coming-soon p {
 			margin: 0;
-			color: #334e68;
 		}
 
 		@media (max-width: 950px) {
