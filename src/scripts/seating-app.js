@@ -55,44 +55,39 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function autoExpandLayout(required, rows, cols, podSize, changed) {
-		rows = Math.min(Math.max(1, rows), 8);
-		cols = Math.min(Math.max(1, cols), 8);
 		podSize = Math.min(Math.max(1, podSize || 1), 4);
 
-		const canGrow = () => (rows < 8 || cols < 8 || podSize < 4);
+		// Growth sequence: 1×1, 1×2, 2×2, 2×3, 3×3, 3×4, …, 8×8
+		// Always prefer near-square grids with cols >= rows.
+		const sequence = [];
+		for (let n = 1; n <= 8; n++) {
+			if (n > 1) sequence.push([n - 1, n]);
+			sequence.push([n, n]);
+		}
 
-		while (rows * cols * podSize < required && canGrow()) {
-			if (changed === 'rows') {
-				if (cols < 8) cols++;
-				else if (podSize < 4) { podSize = podSize === 2 ? 4 : podSize + 1; setPodSize(podSize); }
-				else if (rows < 8) rows++;
-				else break;
-			} else if (changed === 'cols') {
-				if (rows < 8) rows++;
-				else if (podSize < 4) { podSize = podSize === 2 ? 4 : podSize + 1; setPodSize(podSize); }
-				else if (cols < 8) cols++;
-				else break;
-			} else if (changed === 'podSize') {
-				if (rows < 8) rows++;
-				else if (cols < 8) cols++;
-				else if (podSize < 4) { podSize = podSize === 2 ? 4 : podSize + 1; setPodSize(podSize); }
-				else break;
-			} else {
-				// fallback: alternate rows/cols growth, then pod size
-				if (cols < 8) cols++;
-				else if (rows < 8) rows++;
-				else if (podSize < 4) { podSize = podSize === 2 ? 4 : podSize + 1; setPodSize(podSize); }
-				else break;
+		// Find the smallest grid (and pod size if needed) that fits all required seats.
+		let resultRows = 8, resultCols = 8, resultPodSize = podSize;
+		outer:
+		for (let ps = podSize; ps <= 4; ps = ps === 2 ? 4 : ps + 1) {
+			for (const [r, c] of sequence) {
+				if (r * c * ps >= required) {
+					resultRows = r;
+					resultCols = c;
+					resultPodSize = ps;
+					break outer;
+				}
 			}
 		}
 
-		if (changed !== 'rows') {
-			while ((rows - 1) * cols * podSize >= required && rows > 1) {
-				rows--;
-			}
+		if (resultPodSize !== podSize) {
+			setPodSize(resultPodSize);
 		}
 
-		return { rows, cols, podSize };
+		// If the user explicitly made the grid taller or wider, respect that choice.
+		if (changed === 'rows' && rows > resultRows) resultRows = Math.min(8, rows);
+		if (changed === 'cols' && cols > resultCols) resultCols = Math.min(8, cols);
+
+		return { rows: resultRows, cols: resultCols, podSize: resultPodSize };
 	}
 
 	function generatePods(names, rows, cols, podSize) {
