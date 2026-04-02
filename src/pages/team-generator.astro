@@ -1,102 +1,149 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
-import '../styles/team-generator.css';
+import "../styles/team-generator.css";
 ---
 
 <PageLayout title="Team Generator - TeachTools">
-	<div class="team-app">
-		<div class="team-panel">
-			<h2>Team Setup</h2>
-			
-			<label for="studentNames">Names</label>
-			<textarea
-				id="studentNames"
-				placeholder="Enter names separated by commas or newlines&#10;Example: Alice, Bob, Charlie&#10;or&#10;Alice&#10;Bob&#10;Charlie"
-			></textarea>
-			<p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">
-				<span id="studentCount">0 team members</span>
-			</p>
+    <div class="team-app">
+        <div class="team-panel">
+            <h2>Team Setup</h2>
 
-			<h3 style="font-size: 1rem; margin-bottom: 1rem;">Team Configuration</h3>
-			
-			<div class="radio-group">
-				<div class="radio-option">
-					<input
-						type="radio"
-						id="modeCount"
-						name="teamMode"
-						value="count"
-						checked
-					/>
-					<label for="modeCount">Group by Count</label>
-				</div>
-				<label for="numGroups" style="display: block; margin-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;">
-					Number of groups:
-				</label>
-				<input
-					type="number"
-					id="numGroups"
-					min="1"
-					max="20"
-					value="4"
-					style="margin-left: 1.5rem;"
-				/>
-			</div>
+            <label for="studentNames">Names</label>
+            <textarea id="studentNames" placeholder="Alice
+Bob
+Charlie"
+            ></textarea>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">
+                <span id="studentCount">0 team members</span>
+            </p>
 
-			<div class="radio-group">
-				<div class="radio-option">
-					<input
-						type="radio"
-						id="modeSize"
-						name="teamMode"
-						value="size"
-					/>
-					<label for="modeSize">Group by Size</label>
-				</div>
-				<label for="groupSize" style="display: block; margin-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;">
-					Team members per group:
-				</label>
-				<input
-					type="number"
-					id="groupSize"
-					min="1"
-					max="20"
-					value="4"
-					disabled
-					style="margin-left: 1.5rem;"
-				/>
-			</div>
+            <h3 style="font-size: 1rem; margin-bottom: 1rem;">
+                Team Configuration
+            </h3>
 
-			<div style="margin-bottom: 1.5rem; padding: 1rem; background: white; border-radius: 4px;">
-				<label for="includeLeaders" style="display: flex; align-items: center; cursor: pointer; margin: 0;">
-					<input
-						type="checkbox"
-						id="includeLeaders"
-						style="margin-right: 0.75rem; cursor: pointer; width: 18px; height: 18px;"
-					/>
-					<span>Include team leaders 👑</span>
-				</label>
-				
-			</div>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input
+                        type="radio"
+                        id="modeCount"
+                        name="teamMode"
+                        value="count"
+                        checked
+                    />
+                    <label for="modeCount">Group by Count</label>
+                </div>
+                <label
+                    for="numGroups"
+                    style="display: block; margin-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;"
+                >
+                    Number of groups:
+                </label>
+                <input
+                    type="number"
+                    id="numGroups"
+                    min="1"
+                    max="20"
+                    value="4"
+                    style="margin-left: 1.5rem;"
+                />
+            </div>
 
-			<div class="btn-group">
-				<button type="button" class="btn-primary" id="generateTeamsBtn">
-					Generate Teams
-				</button>
-				<button type="button" class="btn-secondary" id="shuffleBtn">
-					🔀 Shuffle
-				</button>
-			</div>
-		</div>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input
+                        type="radio"
+                        id="modeSize"
+                        name="teamMode"
+                        value="size"
+                    />
+                    <label for="modeSize">Group by Size</label>
+                </div>
+                <label
+                    for="groupSize"
+                    style="display: block; margin-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem;"
+                >
+                    Team members per group:
+                </label>
+                <input
+                    type="number"
+                    id="groupSize"
+                    min="1"
+                    max="20"
+                    value="4"
+                    disabled
+                    style="margin-left: 1.5rem;"
+                />
+            </div>
 
-		<div id="teamsWrapper" style="display: none;">
-			<div class="teams-wrapper">
-				<div id="teamsContainer" class="teams-container">
-					<div class="empty-state">Generate teams to see results</div>
-				</div>
-			</div>
-		</div>
-	</div>
+            <div
+                style="margin-bottom: 1.5rem; padding: 1rem; background: white; border-radius: 4px;"
+            >
+                <label
+                    for="includeLeaders"
+                    style="display: flex; align-items: center; cursor: pointer; margin: 0;"
+                >
+                    <input
+                        type="checkbox"
+                        id="includeLeaders"
+                        style="margin-right: 0.75rem; cursor: pointer; width: 18px; height: 18px;"
+                    />
+                    <span>Include team leaders 👑</span>
+                </label>
+            </div>
 
-	<script src="../scripts/team-generator.js"></script>
+            <div
+                id="separateLeaderControls"
+                class="hidden-control"
+                style="margin-bottom: 1.5rem; padding: 1rem; background: white; border-radius: 4px;"
+            >
+                <label
+                    for="useSeparateLeaderList"
+                    style="display: flex; align-items: center; cursor: pointer; margin: 0;"
+                >
+                    <input
+                        type="checkbox"
+                        id="useSeparateLeaderList"
+                        disabled
+                        style="margin-right: 0.75rem; cursor: pointer; width: 18px; height: 18px;"
+                    />
+                    <span>Use separate leader list</span>
+                </label>
+            </div>
+
+            <div id="leaderNamesContainer" class="hidden-control">
+                <label for="leaderNames">Leader Names</label>
+                <textarea id="leaderNames" placeholder="Alice
+Bob
+Charlie"
+                ></textarea>
+                <p
+                    style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;"
+                >
+                    <span id="leaderCount">0 leaders</span>
+                </p>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn-primary" id="generateTeamsBtn">
+                    Generate Teams
+                </button>
+                <button type="button" class="btn-secondary" id="shuffleBtn">
+                    🔀 Shuffle
+                </button>
+            </div>
+        </div>
+
+        <div id="teamsWrapper" style="display: none;">
+            <div class="teams-wrapper">
+                <p id="teamsTip" style="display: none; font-size: 0.95rem; color: #555; margin-bottom: 1rem;">
+                    Tip: Drag and drop people between teams
+                </p>
+                <div id="teamsContainer" class="teams-container">
+                    <div class="empty-state">Generate teams to see results</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/team-generator.js"></script>
 </PageLayout>

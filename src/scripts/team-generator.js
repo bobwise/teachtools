@@ -4,10 +4,12 @@
 class TeamGenerator {
 	constructor() {
 		this.students = [];
+		this.leaderNames = [];
 		this.teams = [];
 		this.teamNames = {}; // Store custom team names
 		this.draggedFrom = null; // Track where member is dragged from
 		this.showLeaders = false; // Track if team leaders are enabled
+		this.useSeparateLeaderList = false;
 		this.setupEventListeners();
 	}
 
@@ -19,14 +21,52 @@ class TeamGenerator {
 		const groupSizeInput = document.getElementById('groupSize');
 		const numGroupsInput = document.getElementById('numGroups');
 		const leadersCheckbox = document.getElementById('includeLeaders');
+		const separateLeaderControls = document.getElementById('separateLeaderControls');
+		const useSeparateLeaderListCheckbox = document.getElementById('useSeparateLeaderList');
+		const leaderNamesContainer = document.getElementById('leaderNamesContainer');
+		const leaderNamesInput = document.getElementById('leaderNames');
 
 		// Toggle leaders checkbox
 		if (leadersCheckbox) {
 			leadersCheckbox.addEventListener('change', (e) => {
 				this.showLeaders = e.target.checked;
+				if (separateLeaderControls) {
+					separateLeaderControls.style.display = this.showLeaders ? 'block' : 'none';
+				}
+				if (useSeparateLeaderListCheckbox) {
+					useSeparateLeaderListCheckbox.disabled = !this.showLeaders;
+					if (!this.showLeaders) {
+						useSeparateLeaderListCheckbox.checked = false;
+					}
+				}
+				if (leaderNamesContainer) {
+					leaderNamesContainer.style.display =
+						this.showLeaders && this.useSeparateLeaderList ? 'block' : 'none';
+				}
+				if (!this.showLeaders) {
+					this.useSeparateLeaderList = false;
+				}
 				if (this.teams.length > 0) {
 					this.displayTeams();
 				}
+			});
+		}
+
+		if (useSeparateLeaderListCheckbox) {
+			useSeparateLeaderListCheckbox.addEventListener('change', (e) => {
+				this.useSeparateLeaderList = e.target.checked && this.showLeaders;
+				if (leaderNamesContainer) {
+					leaderNamesContainer.style.display = this.useSeparateLeaderList ? 'block' : 'none';
+				}
+				if (this.teams.length > 0) {
+					this.displayTeams();
+				}
+			});
+		}
+
+		if (leaderNamesInput) {
+			leaderNamesInput.addEventListener('input', () => {
+				this.parseLeaderNames();
 			});
 		}
 
@@ -66,6 +106,13 @@ class TeamGenerator {
 		} else {
 			groupSizeInput.disabled = true;
 		}
+
+		if (separateLeaderControls) {
+			separateLeaderControls.style.display = 'none';
+		}
+		if (leaderNamesContainer) {
+			leaderNamesContainer.style.display = 'none';
+		}
 	}
 
 	parseStudents() {
@@ -79,14 +126,30 @@ class TeamGenerator {
 		this.updateStudentCount();
 	}
 
+	parseLeaderNames() {
+		const input = document.getElementById('leaderNames')?.value || '';
+		this.leaderNames = input
+			.split(/[,\n]/)
+			.map((name) => name.trim())
+			.filter((name) => name.length > 0);
+
+		const countElement = document.getElementById('leaderCount');
+		if (countElement) {
+			countElement.textContent = `${this.leaderNames.length} leaders`;
+		}
+	}
+
 	updateStudentCount() {
 		const countElement = document.getElementById('studentCount');
 		if (countElement) {
-			countElement.textContent = `${this.students.length} students`;
+			countElement.textContent = `${this.students.length} team members`;
 		}
 	}
 
 	generateTeams() {
+		this.parseStudents();
+		this.parseLeaderNames();
+
 		if (this.students.length === 0) {
 			this.showError('Please add at least one team member');
 			return;
@@ -109,25 +172,63 @@ class TeamGenerator {
 			}
 		}
 
-		// Shuffle students
-		const shuffled = this.shuffleArray([...this.students]);
+		if (this.useSeparateLeaderList && this.leaderNames.length === 0) {
+			this.useSeparateLeaderList = false;
+			const useSeparateLeaderListCheckbox = document.getElementById('useSeparateLeaderList');
+			const leaderNamesContainer = document.getElementById('leaderNamesContainer');
+			if (useSeparateLeaderListCheckbox) {
+				useSeparateLeaderListCheckbox.checked = false;
+			}
+			if (leaderNamesContainer) {
+				leaderNamesContainer.style.display = 'none';
+			}
+		}
+
+		const leaderSet = new Set(this.leaderNames);
+		const nonLeaders = this.students.filter((name) => !leaderSet.has(name));
+		const leadersToDistribute = this.useSeparateLeaderList
+			? this.leaderNames
+			: this.showLeaders
+				? this.students
+				: [];
+
+		const shuffledLeaders = this.shuffleArray([...leadersToDistribute]);
+		const shuffledNonLeaders = this.shuffleArray([...nonLeaders]);
+		const shuffledAll = this.shuffleArray([...this.students]);
 
 		// Create teams
 		this.teams = [];
 		this.teamNames = {}; // Reset team names when generating new teams
-		if (mode === 'size') {
-			// Divide by group size
-			for (let i = 0; i < shuffled.length; i += groupSize) {
-				const team = shuffled.slice(i, i + groupSize);
+
+		if (this.useSeparateLeaderList) {
+			const teamCount = mode === 'count'
+				? numGroups
+				: Math.max(1, Math.ceil(this.students.length / groupSize));
+
+			const teamBuckets = Array.from({ length: teamCount }, () => []);
+
+			// Evenly distribute leaders first; this naturally allows multiple leaders on some teams.
+			shuffledLeaders.forEach((leader, index) => {
+				teamBuckets[index % teamCount].push(leader);
+			});
+
+			// Then distribute non-leaders.
+			shuffledNonLeaders.forEach((member, index) => {
+				teamBuckets[index % teamCount].push(member);
+			});
+
+			this.teams = teamBuckets.filter((team) => team.length > 0);
+		} else if (mode === 'size') {
+			for (let i = 0; i < shuffledAll.length; i += groupSize) {
+				const team = shuffledAll.slice(i, i + groupSize);
 				this.teams.push(team);
 			}
 		} else {
-			// Divide into number of groups
-			groupSize = Math.ceil(shuffled.length / numGroups);
+			groupSize = Math.ceil(shuffledAll.length / numGroups);
 			for (let i = 0; i < numGroups; i++) {
 				const start = i * groupSize;
-				const end = Math.min(start + groupSize, shuffled.length);
-				const team = shuffled.slice(start, end);
+				const end = Math.min(start + groupSize, shuffledAll.length);
+				const team = shuffledAll.slice(start, end);
 				if (team.length > 0) {
 					this.teams.push(team);
 				}
@@ -264,6 +365,7 @@ class TeamGenerator {
 
 				const draggedName = fromTeam[fromMemberIndex];
 				const targetMemberEl = e.target.closest('li[data-member]');
+				const draggedIsLeader = this.isLeaderName(draggedName);
 
 				if (targetMemberEl) {
 					// Drop on a name: swap the two names.
@@ -277,20 +379,51 @@ class TeamGenerator {
 					}
 
 					const targetName = toTeam[targetMemberIndex];
+					const targetIsLeader = this.isLeaderName(targetName);
+
+					if (
+						this.useSeparateLeaderList &&
+						draggedIsLeader !== targetIsLeader
+					) {
+						this.draggedFrom = null;
+						return;
+					}
+
 					if (targetName !== undefined) {
 						toTeam[targetMemberIndex] = draggedName;
 						fromTeam[fromMemberIndex] = targetName;
 					}
 				} else {
-					// Drop on blank team area: move to the end of that team.
+					// Drop on blank team area: move member to target team.
 					fromTeam.splice(fromMemberIndex, 1);
-					toTeam.push(draggedName);
+
+					if (this.useSeparateLeaderList && draggedIsLeader) {
+						// Leaders stay grouped at the top of a team.
+						const firstNonLeaderIndex = toTeam.findIndex(
+							(name) => !this.isLeaderName(name)
+						);
+						const insertIndex =
+							firstNonLeaderIndex === -1 ? toTeam.length : firstNonLeaderIndex;
+						toTeam.splice(insertIndex, 0, draggedName);
+					} else {
+						toTeam.push(draggedName);
+					}
 				}
 
 				this.draggedFrom = null;
 				this.displayTeams();
 			});
 		});
+	}
+
+	isLeaderName(name) {
+		if (!this.showLeaders || !name) {
+			return false;
+		}
+		if (this.useSeparateLeaderList) {
+			return this.leaderNames.includes(name);
+		}
+		return false;
 	}
 
 	shuffleArray(array) {
@@ -306,11 +439,15 @@ class TeamGenerator {
 	displayTeams() {
 		const container = document.getElementById('teamsContainer');
 		const wrapper = document.getElementById('teamsWrapper');
+		const tip = document.getElementById('teamsTip');
 
 		if (!container) return;
 
 		if (this.teams.length === 0) {
 			container.innerHTML = '<div class="empty-state">No teams generated yet</div>';
+			if (tip) {
+				tip.style.display = 'none';
+			}
 			return;
 		}
 
@@ -333,7 +470,9 @@ class TeamGenerator {
 						<h4 class="team-name" data-team-index="${index}">${teamName}</h4>
 						<ul class="team-members">
 							${team.map((student, memberIndex) => {
-							const isLeader = this.showLeaders && memberIndex === 0;
+							const isLeader = this.useSeparateLeaderList
+								? this.isLeaderName(student)
+								: this.showLeaders && memberIndex === 0;
 							const leaderClass = isLeader ? 'team-leader' : '';
 							return `<li draggable="true" data-team="${index}" data-member="${memberIndex}" class="${leaderClass}"><span class="member-name">${student}</span>${isLeader ? '<span class="leader-badge">👑</span>' : ''}</li>`;
 						}).join('')}
@@ -344,6 +483,9 @@ class TeamGenerator {
 			.join('');
 
 		wrapper.style.display = 'block';
+		if (tip) {
+			tip.style.display = 'block';
+		}
 		this.clearMessages();
 		this.attachTeamNameEditors();
 		this.attachDragHandlers();
@@ -352,9 +494,13 @@ class TeamGenerator {
 	showError(message) {
 		const container = document.getElementById('teamsContainer');
 		const wrapper = document.getElementById('teamsWrapper');
+		const tip = document.getElementById('teamsTip');
 
 		if (container) {
 			container.innerHTML = `<div class="error-message">${message}</div>`;
+		}
+		if (tip) {
+			tip.style.display = 'none';
 		}
 		wrapper.style.display = 'block';
 	}

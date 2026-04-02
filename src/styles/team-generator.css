@@ -70,6 +70,10 @@
 	flex: 1;
 }
 
+.hidden-control {
+	display: none;
+}
+
 .btn-group {
 	display: flex;
 	gap: 0.5rem;
