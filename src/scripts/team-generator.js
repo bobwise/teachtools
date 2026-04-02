@@ -455,18 +455,9 @@ class TeamGenerator {
 			.map((team, index) => {
 				const teamNum = index + 1;
 				const teamName = this.teamNames[index] || `Team ${teamNum}`;
-				const colors = [
-					'#e3f2fd',
-					'#f3e5f5',
-					'#e8f5e9',
-					'#fff3e0',
-					'#fce4ec',
-					'#e0f2f1',
-				];
-				const bgColor = colors[index % colors.length];
 
 				return `
-					<div class="team" style="background: linear-gradient(135deg, ${bgColor} 0%, rgba(0, 102, 204, 0.05) 100%)" data-team-drop="${index}">
+					<div class="team" data-team-drop="${index}">
 						<h4 class="team-name" data-team-index="${index}">${teamName}</h4>
 						<ul class="team-members">
 							${team.map((student, memberIndex) => {

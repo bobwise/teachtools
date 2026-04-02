@@ -50,7 +50,7 @@
 }
 
 .radio-group {
-	margin-bottom: 1.5rem;
+	margin-bottom: 1rem;
 }
 
 .radio-option {
@@ -85,7 +85,7 @@
 }
 
 .btn-primary {
-	background-color: #0066cc;
+	background-color: var(--primary);
 	color: white;
 	padding: 0.75rem 1rem;
 	border: none;
@@ -96,7 +96,7 @@
 }
 
 .btn-primary:hover {
-	background-color: #0052a3;
+	background-color: var(--primary-medium);
 }
 
 .btn-primary:disabled {
@@ -140,16 +140,261 @@
 }
 
 .team {
-	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 	border-radius: 8px;
 	padding: 1.5rem;
-	border-left: 4px solid #0066cc;
+	border: 3px solid;
+}
+
+/* Color cycling for each team card */
+.team:nth-child(1) {
+	background-color: var(--blue-faint);
+	border-color: var(--blue);
+}
+
+.team:nth-child(1) h4 {
+	color: var(--blue);
+}
+
+.team:nth-child(1) .team-members li:not(.team-leader) {
+	border-color: var(--blue);
+}
+
+.team:nth-child(1) .team-name:hover {
+	background-color: rgba(0, 94, 162, 0.1);
+}
+
+.team:nth-child(1).drag-over {
+	box-shadow: inset 0 0 0 1px var(--blue);
+	background-color: rgba(0, 94, 162, 0.05) !important;
+}
+
+.team:nth-child(2) {
+	background-color: var(--red-faint);
+	border-color: var(--red);
+}
+
+.team:nth-child(2) h4 {
+	color: var(--red);
+}
+
+.team:nth-child(2) .team-members li:not(.team-leader) {
+	border-color: var(--red);
+}
+
+.team:nth-child(2) .team-name:hover {
+	background-color: rgba(217, 83, 79, 0.1);
+}
+
+.team:nth-child(2).drag-over {
+	box-shadow: inset 0 0 0 1px var(--red);
+	background-color: rgba(217, 83, 79, 0.05) !important;
+}
+
+.team:nth-child(3) {
+	background-color: var(--green-faint);
+	border-color: var(--green);
+}
+
+.team:nth-child(3) h4 {
+	color: var(--green-dark);
+}
+
+.team:nth-child(3) .team-members li:not(.team-leader) {
+	border-color: var(--green);
+}
+
+.team:nth-child(3) .team-name:hover {
+	background-color: rgba(92, 184, 92, 0.1);
+}
+
+.team:nth-child(3).drag-over {
+	box-shadow: inset 0 0 0 1px var(--green);
+	background-color: rgba(92, 184, 92, 0.05) !important;
+}
+
+.team:nth-child(4) {
+	background-color: var(--yellow-faint);
+	border-color: var(--yellow);
+}
+
+.team:nth-child(4) h4 {
+	color: var(--yellow-dark);
+}
+
+.team:nth-child(4) .team-members li:not(.team-leader) {
+	border-color: var(--yellow);
+}
+
+.team:nth-child(4) .team-name:hover {
+	background-color: rgba(255, 193, 7, 0.1);
+}
+
+.team:nth-child(4).drag-over {
+	box-shadow: inset 0 0 0 1px var(--yellow);
+	background-color: rgba(255, 193, 7, 0.05) !important;
+}
+
+.team:nth-child(5) {
+	background-color: var(--purple-faint);
+	border-color: var(--purple);
+}
+
+.team:nth-child(5) h4 {
+	color: var(--purple);
+}
+
+.team:nth-child(5) .team-members li:not(.team-leader) {
+	border-color: var(--purple);
+}
+
+.team:nth-child(5) .team-name:hover {
+	background-color: rgba(111, 66, 193, 0.1);
+}
+
+.team:nth-child(5).drag-over {
+	box-shadow: inset 0 0 0 1px var(--purple);
+	background-color: rgba(111, 66, 193, 0.05) !important;
+}
+
+.team:nth-child(6) {
+	background-color: var(--pink-faint);
+	border-color: var(--pink);
+}
+
+.team:nth-child(6) h4 {
+	color: var(--pink);
+}
+
+.team:nth-child(6) .team-members li:not(.team-leader) {
+	border-color: var(--pink);
+}
+
+.team:nth-child(6) .team-name:hover {
+	background-color: rgba(232, 62, 140, 0.1);
+}
+
+.team:nth-child(6).drag-over {
+	box-shadow: inset 0 0 0 1px var(--pink);
+	background-color: rgba(232, 62, 140, 0.05) !important;
+}
+
+.team:nth-child(7) {
+	background-color: var(--orange-faint);
+	border-color: var(--orange);
+}
+
+.team:nth-child(7) h4 {
+	color: var(--orange-dark);
+}
+
+.team:nth-child(7) .team-members li:not(.team-leader) {
+	border-color: var(--orange);
+}
+
+.team:nth-child(7) .team-name:hover {
+	background-color: rgba(240, 173, 78, 0.1);
+}
+
+.team:nth-child(7).drag-over {
+	box-shadow: inset 0 0 0 1px var(--orange);
+	background-color: rgba(240, 173, 78, 0.05) !important;
+}
+
+/* Cycle back to start for 8+ teams */
+.team:nth-child(8n+1) {
+	background-color: var(--blue-faint);
+	border-color: var(--blue);
+}
+
+.team:nth-child(8n+1) h4 {
+	color: var(--blue);
+}
+
+.team:nth-child(8n+1) .team-members li:not(.team-leader) {
+	border-color: var(--blue);
+}
+
+.team:nth-child(8n+2) {
+	background-color: var(--red-faint);
+	border-color: var(--red);
+}
+
+.team:nth-child(8n+2) h4 {
+	color: var(--red);
+}
+
+.team:nth-child(8n+2) .team-members li:not(.team-leader) {
+	border-color: var(--red);
+}
+
+.team:nth-child(8n+3) {
+	background-color: var(--green-faint);
+	border-color: var(--green);
+}
+
+.team:nth-child(8n+3) h4 {
+	color: var(--green-dark);
+}
+
+.team:nth-child(8n+3) .team-members li:not(.team-leader) {
+	border-color: var(--green);
+}
+
+.team:nth-child(8n+4) {
+	background-color: var(--yellow-faint);
+	border-color: var(--yellow);
+}
+
+.team:nth-child(8n+4) h4 {
+	color: var(--yellow-dark);
+}
+
+.team:nth-child(8n+4) .team-members li:not(.team-leader) {
+	border-color: var(--yellow);
+}
+
+.team:nth-child(8n+5) {
+	background-color: var(--purple-faint);
+	border-color: var(--purple);
+}
+
+.team:nth-child(8n+5) h4 {
+	color: var(--purple);
+}
+
+.team:nth-child(8n+5) .team-members li:not(.team-leader) {
+	border-color: var(--purple);
+}
+
+.team:nth-child(8n+6) {
+	background-color: var(--pink-faint);
+	border-color: var(--pink);
+}
+
+.team:nth-child(8n+6) h4 {
+	color: var(--pink);
+}
+
+.team:nth-child(8n+6) .team-members li:not(.team-leader) {
+	border-color: var(--pink);
+}
+
+.team:nth-child(8n+7) {
+	background-color: var(--orange-faint);
+	border-color: var(--orange);
+}
+
+.team:nth-child(8n+7) h4 {
+	color: var(--orange-dark);
+}
+
+.team:nth-child(8n+7) .team-members li:not(.team-leader) {
+	border-color: var(--orange);
 }
 
 .team h4 {
 	margin-top: 0;
 	margin-bottom: 1rem;
-	color: #0066cc;
 	font-size: 1.1rem;
 }
 
@@ -160,19 +405,71 @@
 	transition: background-color 0.2s;
 }
 
-.team-name:hover {
-	background-color: rgba(0, 102, 204, 0.1);
-}
-
 .team-name-input {
 	width: 100%;
 	padding: 0.5rem;
 	margin: 0 0 1rem 0;
-	border: 2px solid #0066cc;
+	border: 2px solid;
 	border-radius: 4px;
 	font-size: 1.1rem;
 	font-weight: bold;
 	box-sizing: border-box;
+}
+
+.team:nth-child(1) .team-name-input {
+	border-color: var(--blue);
+}
+
+.team:nth-child(2) .team-name-input {
+	border-color: var(--red);
+}
+
+.team:nth-child(3) .team-name-input {
+	border-color: var(--green);
+}
+
+.team:nth-child(4) .team-name-input {
+	border-color: var(--yellow);
+}
+
+.team:nth-child(5) .team-name-input {
+	border-color: var(--purple);
+}
+
+.team:nth-child(6) .team-name-input {
+	border-color: var(--pink);
+}
+
+.team:nth-child(7) .team-name-input {
+	border-color: var(--orange);
+}
+
+.team:nth-child(8n+1) .team-name-input {
+	border-color: var(--blue);
+}
+
+.team:nth-child(8n+2) .team-name-input {
+	border-color: var(--red);
+}
+
+.team:nth-child(8n+3) .team-name-input {
+	border-color: var(--green);
+}
+
+.team:nth-child(8n+4) .team-name-input {
+	border-color: var(--yellow);
+}
+
+.team:nth-child(8n+5) .team-name-input {
+	border-color: var(--purple);
+}
+
+.team:nth-child(8n+6) .team-name-input {
+	border-color: var(--pink);
+}
+
+.team:nth-child(8n+7) .team-name-input {
+	border-color: var(--orange);
 }
 
 .team-members {
@@ -186,7 +483,7 @@
 	margin-bottom: 0.5rem;
 	background: white;
 	border-radius: 4px;
-	border-left: 3px solid #0066cc;
+	border: 2px solid;
 	font-size: 0.95rem;
 	cursor: move;
 	transition: all 0.2s;
@@ -209,8 +506,8 @@
 }
 
 .team-members li.team-leader {
-	background: linear-gradient(135deg, #fff9e6 0%, #fffaf0 100%);
-	border-left-color: #ffc107;
+	background: linear-gradient(135deg, var(--yellow-light) 0%, var(--yellow-faint) 100%);
+	border-color: var(--yellow) !important;
 	font-weight: 500;
 }
 
@@ -227,11 +524,6 @@
 	font-size: 1.1rem;
 }
 
-.team.drag-over {
-	box-shadow: inset 0 0 0 2px #0066cc;
-	background-color: rgba(0, 102, 204, 0.05) !important;
-}
-
 .empty-state {
 	text-align: center;
 	color: #999;
@@ -245,7 +537,7 @@
 	margin-bottom: 1rem;
 	background: #ffebee;
 	border-radius: 4px;
-	border-left: 4px solid #d32f2f;
+	border: 4px solid #d32f2f;
 }
 
 .success-message {
@@ -254,7 +546,7 @@
 	margin-bottom: 1rem;
 	background: #e8f5e9;
 	border-radius: 4px;
-	border-left: 4px solid #388e3c;
+	border: 4px solid #388e3c;
 }
 
 /* Responsive adjustments */

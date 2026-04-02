@@ -1,13 +1,7 @@
 :root {
     --panel-bg: #fff;
     --highlight: #61b4ef;
-    --primary: #005ea2;
-    --primary-medium: #1a4480;
-    --primary-dark: #162e51;
-    --secondary: #7fbfbf;
-    --secondary-medium: #9fd0d0;
-    --secondary-dark: #5f9f9f;
-    --seat-bg: #a5a5a5;
+
 }
 
 .app {
