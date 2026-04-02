@@ -11,6 +11,16 @@ class TeamGenerator {
 		this.showLeaders = false; // Track if team leaders are enabled
 		this.useSeparateLeaderList = false;
 		this.setupEventListeners();
+		this.initializeDefaultTeams();
+	}
+
+	initializeDefaultTeams() {
+		this.parseStudents();
+		this.parseLeaderNames();
+
+		if (this.students.length > 0) {
+			this.generateTeams();
+		}
 	}
 
 	setupEventListeners() {
