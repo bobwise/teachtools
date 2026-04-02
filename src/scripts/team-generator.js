@@ -87,9 +87,11 @@ class TeamGenerator {
 				if (mode === 'size') {
 					groupSizeInput.disabled = false;
 					numGroupsInput.disabled = true;
+					numGroupsInput.value = '';
 				} else {
 					groupSizeInput.disabled = true;
 					numGroupsInput.disabled = false;
+					groupSizeInput.value = '';
 				}
 			});
 		});
@@ -113,8 +115,10 @@ class TeamGenerator {
 		);
 		if (sizeRadio && sizeRadio.checked) {
 			numGroupsInput.disabled = true;
+			numGroupsInput.value = '';
 		} else {
 			groupSizeInput.disabled = true;
+			groupSizeInput.value = '';
 		}
 
 		if (separateLeaderControls) {
@@ -187,18 +191,18 @@ class TeamGenerator {
 		}
 
 		const mode = document.querySelector('input[name="teamMode"]:checked').value;
-		let groupSize = parseInt(document.getElementById('groupSize').value);
-		let numGroups = parseInt(document.getElementById('numGroups').value);
+		const groupSize = parseInt(document.getElementById('groupSize').value, 10);
+		const numGroups = parseInt(document.getElementById('numGroups').value, 10);
 
 		// Validate inputs
 		if (mode === 'size') {
-			if (groupSize < 1) {
-				this.showError('Group size must be at least 1');
+			if (!Number.isInteger(groupSize) || groupSize < 1) {
+				this.showError('Please enter a team members per group value of at least 1');
 				return;
 			}
 		} else {
-			if (numGroups < 1) {
-				this.showError('Number of groups must be at least 1');
+			if (!Number.isInteger(numGroups) || numGroups < 1) {
+				this.showError('Please enter a number of groups value of at least 1');
 				return;
 			}
 		}
