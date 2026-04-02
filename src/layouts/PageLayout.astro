@@ -42,7 +42,7 @@ const imageUrl = new URL(image, canonicalUrl).toString();
 			href="/apple-touch-icon.png"
 		/>
 		<link rel="manifest" href="/site.webmanifest" />
-		
+
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
@@ -61,6 +61,12 @@ const imageUrl = new URL(image, canonicalUrl).toString();
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={imageUrl} />
+
+		<script
+			async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2754098290061350"
+			crossorigin="anonymous"></script>
+
 		<title>{title}</title>
 	</head>
 	<body>
