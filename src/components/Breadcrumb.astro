@@ -1,0 +1,52 @@
+---
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const segmentLabelMap: Record<string, string> = {
+    'seating-chart-generator': 'Seating Chart Generator',
+    'team-generator': 'Team Generator',
+    'random-student-picker': 'Random Name Picker',
+};
+
+const crumbs = [{ label: 'Home', href: '/' }];
+
+if (pathname !== '/') {
+    const segments = pathname.split('/').filter(Boolean);
+    let currentPath = '';
+
+    segments.forEach((segment) => {
+        currentPath += `/${segment}`;
+        const label =
+            segmentLabelMap[segment] ||
+            segment
+                .split('-')
+                .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+                .join(' ');
+
+        crumbs.push({
+            label,
+            href: currentPath,
+        });
+    });
+}
+---
+
+{
+    pathname !== '/' && (
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+                {crumbs.map((crumb, index) => {
+                    const isLast = index === crumbs.length - 1;
+                    return (
+                        <li>
+                            {isLast ? (
+                                <span aria-current="page">{crumb.label}</span>
+                            ) : (
+                                <a href={crumb.href}>{crumb.label}</a>
+                            )}
+                        </li>
+                    );
+                })}
+            </ol>
+        </nav>
+    )
+}
