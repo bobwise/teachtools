@@ -6,6 +6,195 @@ import PageLayout from "../layouts/PageLayout.astro";
 	title="Home - TeachTools"
 	description="TeachTools is a free library of interactive and educational tools for teachers, professors, and team leaders. TeachTools offers a Seating Chart Generator, a Team Generator, and a Random Student Picker. All tools on TeachTools are free to use, no payment or login required."
 >
-	<h1>Welcome to TeachTools</h1>
-	<p>Tools for teachers</p>
+	<section class="home-hero">
+		<p class="hero-eyebrow">Built for busy classrooms and teams</p>
+		<h1>Simple Teaching Tools That Are Free To Use</h1>
+		<p class="hero-lead">
+			No accounts. No subscriptions. No setup headaches. Just open a tool
+			and start in seconds.
+		</p>
+		<p class="hero-pill">100% free and no login required</p>
+	</section>
+
+	<section class="tool-grid" aria-label="TeachTools app links">
+		<a
+			class="tool-card panel panel-blue"
+			href="/seating-chart-generator"
+		>
+			<p class="tool-tag">Classroom Layout</p>
+			<h2>Seating Chart Generator</h2>
+			<p>
+				Build printable seating charts quickly, adjust rows and columns,
+				and rearrange desks with drag and drop.
+			</p>
+			<span class="card-link">Open tool</span>
+		</a>
+
+		<a class="tool-card panel panel-orange" href="/team-generator">
+			<p class="tool-tag">Group Activities</p>
+			<h2>Team Generator</h2>
+			<p>
+				Create balanced groups by team count or size, include leaders,
+				and shuffle instantly.
+			</p>
+			<span class="card-link">Open tool</span>
+		</a>
+
+		<a class="tool-card panel panel-green" href="/random-student-picker">
+			<p class="tool-tag">Participation Support</p>
+			<h2>Random Name Picker</h2>
+			<p>
+				Pick students fairly with optional no-repeat mode so everyone
+				gets a turn before repeats.
+			</p>
+			<span class="card-link">Open tool</span>
+		</a>
+	</section>
+
+	<section class="coming-soon" aria-label="Upcoming tools">
+		<h2>More Tools Coming Soon</h2>
+		<p>
+			TeachTools is growing. New free, no-login classroom tools are on the
+			way.
+		</p>
+	</section>
+
+	<style>
+		.home-hero {
+			position: relative;
+			overflow: hidden;
+			margin-bottom: 2rem;
+			padding: 2.2rem 1.5rem;
+			border: 1px solid #d9e3e7;
+			border-radius: 16px;
+			background:
+				radial-gradient(circle at 10% 20%, #eff7ff 0%, transparent 40%),
+				radial-gradient(circle at 95% 80%, #fff2df 0%, transparent 35%),
+				linear-gradient(140deg, #ffffff 0%, #f7fbff 100%);
+		}
+
+		.hero-eyebrow {
+			margin: 0 0 0.5rem;
+			font-size: 0.85rem;
+			font-weight: 700;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			color: #1a4480;
+		}
+
+		.home-hero h1 {
+			margin: 0 0 0.75rem;
+			font-size: clamp(1.8rem, 3vw, 2.4rem);
+			line-height: 1.15;
+			color: #102a43;
+		}
+
+		.hero-lead {
+			max-width: 62ch;
+			margin: 0;
+			font-size: 1.05rem;
+			line-height: 1.55;
+			color: #334e68;
+		}
+
+		.hero-pill {
+			display: inline-block;
+			margin-top: 1rem;
+			padding: 0.45rem 0.75rem;
+			border: 1px solid #bad9ff;
+			border-radius: 999px;
+			font-size: 0.85rem;
+			font-weight: 700;
+			background: #e8f3ff;
+			color: #1a4480;
+		}
+
+		.tool-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+		}
+
+		.tool-card {
+			display: flex;
+			flex-direction: column;
+			gap: 0.7rem;
+			padding: 1.15rem;
+			border-radius: 14px;
+			text-decoration: none;
+		}
+
+		.tool-card:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 10px 20px rgba(16, 42, 67, 0.12);
+		}
+
+		.tool-tag {
+			margin: 0;
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+
+		.tool-card h2 {
+			margin: 0;
+			font-size: 1.25rem;
+			line-height: 1.2;
+		}
+
+		.tool-card p {
+			margin: 0;
+			line-height: 1.5;
+		}
+
+		.card-link {
+			margin-top: auto;
+			font-weight: 700;
+			color: #102a43;
+		}
+
+		.teams {
+			background: linear-gradient(160deg, #fff8f3 0%, #ffffff 65%);
+		}
+
+		.teams .tool-tag,
+		.teams h2 {
+			color: #7a4700;
+		}
+
+		.picker {
+			background: linear-gradient(160deg, #f4fff7 0%, #ffffff 65%);
+		}
+
+		.picker .tool-tag,
+		.picker h2 {
+			color: #255825;
+		}
+
+		.coming-soon {
+			margin-top: 1.2rem;
+			padding: 1rem 1.2rem;
+			border-left: 5px solid #005ea2;
+			background: #f4f8fc;
+			border-radius: 8px;
+		}
+
+		.coming-soon h2 {
+			margin: 0 0 0.35rem;
+			font-size: 1.1rem;
+			color: #102a43;
+		}
+
+		.coming-soon p {
+			margin: 0;
+			color: #334e68;
+		}
+
+		@media (max-width: 950px) {
+			.tool-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
 </PageLayout>

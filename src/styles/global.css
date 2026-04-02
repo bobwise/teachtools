@@ -1,6 +1,6 @@
 :root {
     /* Blue / Primary Colors (lightest to darkest: faint, light, base, medium, dark) */
-    --blue-faint: #d6e8f5;
+    --blue-faint: #f0f8fd;
     --blue-light: #4d94d4;
     --blue: #005ea2;
     --blue-medium: #1a4480;
@@ -21,7 +21,7 @@
     --red-dark: #ac2925;
 
     /* Orange Colors (lightest to darkest: faint, light, base, medium, dark) */
-    --orange-faint: #ffe8d1;
+    --orange-faint: #fdf0e3;
     --orange-light: #ffd4a3;
     --orange: #f0ad4e;
     --orange-medium: #ec971f;
@@ -35,7 +35,7 @@
     --yellow-dark: #7c5d00;
 
     /* Green Colors (lightest to darkest: faint, light, base, medium, dark) */
-    --green-faint: #d4edda;
+    --green-faint: #e9ffee;
     --green-light: #a6d9a8;
     --green: #5cb85c;
     --green-medium: #4cae4c;
@@ -198,6 +198,36 @@ h1 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: #333;
+}
+
+.panel.panel-blue {
+    border: 1px solid var(--blue);
+    color: var(--blue-dark);
+    background-color: var(--blue-faint);
+
+    h2 {
+        color: var(--blue-dark);
+    }
+}
+
+.panel.panel-orange {
+    border: 1px solid var(--orange);
+    color: var(--orange-dark);
+    background-color: var(--orange-faint);
+
+    h2 {
+        color: var(--orange-dark);
+    }
+}
+
+.panel.panel-green {
+    border: 1px solid var(--green);
+    color: var(--green-dark);
+    background-color: var(--green-faint);
+
+    h2 {
+        color: var(--green-dark);
+    }
 }
 
 .btn-group {
