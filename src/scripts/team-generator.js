@@ -88,7 +88,7 @@ class TeamGenerator {
 
 	generateTeams() {
 		if (this.students.length === 0) {
-			this.showError('Please add at least one student');
+			this.showError('Please add at least one team member');
 			return;
 		}
 
