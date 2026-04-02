@@ -219,6 +219,7 @@ class TeamGenerator {
 				const memberIndex = parseInt(member.dataset.member);
 				this.draggedFrom = { teamIndex, memberIndex };
 				e.dataTransfer.effectAllowed = 'move';
+				e.dataTransfer.setData('text/plain', member.textContent || '');
 				member.classList.add('dragging');
 			});
 
@@ -251,33 +252,39 @@ class TeamGenerator {
 				if (!this.draggedFrom) return;
 
 				const dropTeamIndex = parseInt(team.dataset.teamDrop);
+				const fromTeamIndex = this.draggedFrom.teamIndex;
+				const fromMemberIndex = this.draggedFrom.memberIndex;
+				const fromTeam = this.teams[fromTeamIndex];
+				const toTeam = this.teams[dropTeamIndex];
 
-				// Find the member being dragged over (if any)
-				const memberList = team.querySelector('.team-members');
-				const memberElements = Array.from(memberList.querySelectorAll('li'));
-				let targetMemberIndex = memberElements.length;
-
-				// Find which member in the drop team to swap with
-				const dropTarget = e.target;
-				if (dropTarget.tagName === 'LI') {
-					targetMemberIndex = parseInt(dropTarget.dataset.member);
+				if (!fromTeam || !toTeam || fromMemberIndex < 0 || fromMemberIndex >= fromTeam.length) {
+					this.draggedFrom = null;
+					return;
 				}
 
-				// Swap members
-				const fromTeam = this.teams[this.draggedFrom.teamIndex];
-				const fromMember = fromTeam[this.draggedFrom.memberIndex];
+				const draggedName = fromTeam[fromMemberIndex];
+				const targetMemberEl = e.target.closest('li[data-member]');
 
-				const toTeam = this.teams[dropTeamIndex];
-				const toMember = toTeam[targetMemberIndex];
+				if (targetMemberEl) {
+					// Drop on a name: swap the two names.
+					const targetMemberIndex = parseInt(targetMemberEl.dataset.member);
+					if (
+						dropTeamIndex === fromTeamIndex &&
+						targetMemberIndex === fromMemberIndex
+					) {
+						this.draggedFrom = null;
+						return;
+					}
 
-				// Swap
-				if (toMember !== undefined) {
-					fromTeam[this.draggedFrom.memberIndex] = toMember;
-					toTeam[targetMemberIndex] = fromMember;
+					const targetName = toTeam[targetMemberIndex];
+					if (targetName !== undefined) {
+						toTeam[targetMemberIndex] = draggedName;
+						fromTeam[fromMemberIndex] = targetName;
+					}
 				} else {
-					// Drop at end of team
-					fromTeam[this.draggedFrom.memberIndex] = toTeam.pop();
-					toTeam.push(fromMember);
+					// Drop on blank team area: move to the end of that team.
+					fromTeam.splice(fromMemberIndex, 1);
+					toTeam.push(draggedName);
 				}
 
 				this.draggedFrom = null;
