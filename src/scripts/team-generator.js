@@ -27,6 +27,7 @@ class TeamGenerator {
 		const namesInput = document.getElementById('studentNames');
 		const generateBtn = document.getElementById('generateTeamsBtn');
 		const shuffleBtn = document.getElementById('shuffleBtn');
+		const printBtn = document.getElementById('printBtn');
 		const clearBtn = document.getElementById('clear');
 		const modeRadios = document.querySelectorAll('input[name="teamMode"]');
 		const groupSizeInput = document.getElementById('groupSize');
@@ -126,6 +127,12 @@ class TeamGenerator {
 		shuffleBtn.addEventListener('click', () => {
 			this.shuffleTeams();
 		});
+
+		if (printBtn) {
+			printBtn.addEventListener('click', () => {
+				this.printTeams();
+			});
+		}
 
 		// Initialize
 		const sizeRadio = document.querySelector(
@@ -371,6 +378,96 @@ class TeamGenerator {
 		}
 
 		this.generateTeams();
+	}
+
+	printTeams() {
+		if (this.teams.length === 0) {
+			this.showError('Generate teams first');
+			return;
+		}
+
+		const printWindow = window.open('', '_blank');
+		if (!printWindow) {
+			alert('Popup blocked: allow popups to print teams.');
+			return;
+		}
+
+		const teamsHtml = this.teams
+			.map((team, index) => {
+				const teamName = this.teamNames[index] || `Team ${index + 1}`;
+				const members = team
+					.map((student, memberIndex) => {
+						const isLeader = this.useSeparateLeaderList
+							? this.isLeaderName(student)
+							: this.showLeaders && memberIndex === 0;
+						return `<li>${student}${isLeader ? ' 👑' : ''}</li>`;
+					})
+					.join('');
+
+				return `
+					<section class="print-team">
+						<h2>${teamName}</h2>
+						<ul>${members}</ul>
+					</section>
+				`;
+			})
+			.join('');
+
+		const style = `
+			<style>
+				@font-face {
+					font-family: "Open Sans";
+					src: url("/fonts/OpenSans-Regular.ttf") format("truetype");
+					font-weight: 400;
+					font-style: normal;
+				}
+
+				@font-face {
+					font-family: "Open Sans";
+					src: url("/fonts/OpenSans-Bold.ttf") format("truetype");
+					font-weight: 700;
+					font-style: normal;
+				}
+
+				* { box-sizing: border-box; }
+				body {
+					font-family: "Open Sans", Arial, sans-serif;
+					margin: 0;
+					padding: 24px;
+					color: #222;
+					background: #fff;
+				}
+				h1 {
+					margin: 0 0 16px;
+					font-size: 24px;
+				}
+				.print-grid {
+					display: grid;
+					grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+					gap: 12px;
+				}
+				.print-team {
+					border: 1px solid #ccc;
+					border-radius: 8px;
+					padding: 12px;
+					break-inside: avoid;
+				}
+				.print-team h2 {
+					font-size: 18px;
+					margin: 0 0 8px;
+				}
+				.print-team ul {
+					margin: 0;
+					padding-left: 20px;
+				}
+				.print-team li {
+					margin: 4px 0;
+				}
+			</style>
+		`;
+
+		printWindow.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Print Teams</title>${style}</head><body><div class="print-grid">${teamsHtml}</div><script>setTimeout(()=>window.print(),150);</script></body></html>`);
+		printWindow.document.close();
 	}
 
 	isDefaultTeamName(teamIndex, teamName) {

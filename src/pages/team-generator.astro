@@ -78,10 +78,7 @@ const defaultLeaderNamesText = DEFAULT_LEADER_NAMES.join("\n");
 
             <div class="checkbox-container">
                 <label for="includeLeaders">
-                    <input
-                        type="checkbox"
-                        id="includeLeaders"
-                    />
+                    <input type="checkbox" id="includeLeaders" />
                     <span>Include team leaders 👑</span>
                 </label>
             </div>
@@ -123,19 +120,21 @@ Charlie..."
                 <button type="button" class="btn-primary" id="generateTeamsBtn">
                     Make Teams
                 </button>
+            </div>
+            
+            <div class="btn-group">
                 <button type="button" class="btn-tertiary" id="shuffleBtn">
                     🔀 Shuffle
+                </button>
+                <button type="button" class="btn-tertiary" id="printBtn">
+                    🖨️ Print
                 </button>
             </div>
         </div>
 
         <div id="teamsWrapper" style="display: none;">
             <div class="teams-wrapper">
-                <p
-                    id="teamsTip"
-                    style="display: none;"
-                    class="help-text"
-                >
+                <p id="teamsTip" style="display: none;" class="help-text">
                     Tip: Drag and drop between teams
                 </p>
                 <div id="teamsContainer" class="teams-container">
