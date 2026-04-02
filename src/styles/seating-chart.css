@@ -40,7 +40,7 @@ input[type=number] {
 
 textarea {
     width: 100%;
-    min-height: 100px;
+    min-height: 200px;
     margin-top: 8px;
     padding: 8px;
     font-size: 16px;
@@ -197,8 +197,6 @@ button:focus-visible {
 }
 
 #dragLabel {
-    font-size: 14px;
-    color: #343434;
     margin-bottom: 6px;
 }
 

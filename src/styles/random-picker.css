@@ -16,10 +16,15 @@
 
 textarea {
     width: 100%;
-    min-height: 100px;
+    min-height: 200px;
     margin-top: 8px;
     padding: 8px;
     font-size: 16px;
+}
+
+#generateTeamsBtn:focus {
+    outline: 4px solid var(--blue-light);
+    outline-offset: 2px;
 }
 
 .controls button[disabled] {
