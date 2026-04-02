@@ -592,12 +592,12 @@
 }
 
 .error-message {
-    color: #d32f2f;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    background: #ffebee;
-    border-radius: 4px;
-    border-left: 2px solid #d32f2f;
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: fit-content;
+    border: 1px solid var(--red);
+    color: var(--red-dark);
+    background-color: var(--red-faint);
 }
 
 .success-message {
