@@ -146,6 +146,27 @@ class TeamGenerator {
 		}
 	}
 
+	distributeIntoGroupCount(members, requestedGroupCount) {
+		const actualGroupCount = Math.min(requestedGroupCount, members.length);
+		if (actualGroupCount === 0) {
+			return [];
+		}
+
+		const baseGroupSize = Math.floor(members.length / actualGroupCount);
+		const groupsWithExtraMember = members.length % actualGroupCount;
+		const groups = [];
+		let startIndex = 0;
+
+		for (let index = 0; index < actualGroupCount; index++) {
+			const currentGroupSize = baseGroupSize + (index < groupsWithExtraMember ? 1 : 0);
+			const endIndex = startIndex + currentGroupSize;
+			groups.push(members.slice(startIndex, endIndex));
+			startIndex = endIndex;
+		}
+
+		return groups;
+	}
+
 	generateTeams() {
 		this.parseStudents();
 		this.parseLeaderNames();
@@ -224,15 +245,7 @@ class TeamGenerator {
 				this.teams.push(team);
 			}
 		} else {
-			groupSize = Math.ceil(shuffledAll.length / numGroups);
-			for (let i = 0; i < numGroups; i++) {
-				const start = i * groupSize;
-				const end = Math.min(start + groupSize, shuffledAll.length);
-				const team = shuffledAll.slice(start, end);
-				if (team.length > 0) {
-					this.teams.push(team);
-				}
-			}
+			this.teams = this.distributeIntoGroupCount(shuffledAll, numGroups);
 		}
 
 		this.displayTeams();
