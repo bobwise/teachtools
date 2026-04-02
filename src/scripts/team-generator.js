@@ -257,18 +257,7 @@ class TeamGenerator {
 			return;
 		}
 
-		// Flatten teams, shuffle, and regenerate
-		const shuffled = this.shuffleArray([...this.students]);
-		const groupSize = Math.ceil(shuffled.length / this.teams.length);
-
-		this.teams = [];
-		this.teamNames = {}; // Reset team names when shuffling
-		for (let i = 0; i < shuffled.length; i += groupSize) {
-			const team = shuffled.slice(i, i + groupSize);
-			this.teams.push(team);
-		}
-
-		this.displayTeams();
+		this.generateTeams();
 	}
 
 	isDefaultTeamName(teamIndex, teamName) {
