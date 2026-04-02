@@ -258,48 +258,60 @@ class TeamGenerator {
 		this.displayTeams();
 	}
 
+	isDefaultTeamName(teamIndex, teamName) {
+		return teamName === `Team ${teamIndex + 1}`;
+	}
+
+	getTeamHeadingMarkup(teamIndex, teamName) {
+		const showEditAffordance = this.isDefaultTeamName(teamIndex, teamName);
+		return `
+			<h4 class="team-name${showEditAffordance ? ' team-name-default' : ''}" data-team-index="${teamIndex}" data-team-name="${teamName}">
+				<span class="team-name-text">${teamName}</span>
+				${showEditAffordance ? '<span class="team-name-edit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92 2.33H5v-.92l9.06-9.06.92.92L5.92 19.58zM20.71 7.04a.996.996 0 0 0 0-1.41L18.37 3.29a.996.996 0 1 0-1.41 1.41L19.3 7.04a.996.996 0 0 0 1.41 0z"/></svg></span>' : ''}
+			</h4>
+		`;
+	}
+
 	attachTeamNameEditors() {
 		const teamHeadings = document.querySelectorAll('.team-name');
 		teamHeadings.forEach((heading) => {
 			heading.addEventListener('click', (e) => {
 				if (e.target.tagName === 'INPUT') return; // Don't edit if already editing
 				const teamIndex = heading.dataset.teamIndex;
-				const currentName = heading.textContent;
-				
+				const currentName = heading.dataset.teamName || heading.querySelector('.team-name-text')?.textContent || heading.textContent;
+
 				// Create input field
 				const input = document.createElement('input');
 				input.type = 'text';
 				input.value = currentName;
 				input.className = 'team-name-input';
-				
+
 				// Replace heading with input
 				heading.replaceWith(input);
 				input.focus();
 				input.select();
-				
+
 				const saveName = () => {
 					const newName = input.value.trim() || currentName;
 					this.teamNames[teamIndex] = newName;
-					
-					const newHeading = document.createElement('h4');
-					newHeading.className = 'team-name';
-					newHeading.dataset.teamIndex = teamIndex;
-					newHeading.textContent = newName;
-					
+
+					const template = document.createElement('template');
+					template.innerHTML = this.getTeamHeadingMarkup(Number(teamIndex), newName).trim();
+					const newHeading = template.content.firstElementChild;
+
 					input.replaceWith(newHeading);
 					this.attachTeamNameEditors();
 				};
-				
+
 				const cancelEdit = () => {
-					const newHeading = document.createElement('h4');
-					newHeading.className = 'team-name';
-					newHeading.dataset.teamIndex = teamIndex;
-					newHeading.textContent = currentName;
-					
+					const template = document.createElement('template');
+					template.innerHTML = this.getTeamHeadingMarkup(Number(teamIndex), currentName).trim();
+					const newHeading = template.content.firstElementChild;
+
 					input.replaceWith(newHeading);
 					this.attachTeamNameEditors();
 				};
-				
+
 				input.addEventListener('blur', saveName);
 				input.addEventListener('keydown', (e) => {
 					if (e.key === 'Enter') saveName();
@@ -458,15 +470,15 @@ class TeamGenerator {
 
 				return `
 					<div class="team" data-team-drop="${index}">
-						<h4 class="team-name" data-team-index="${index}">${teamName}</h4>
+						${this.getTeamHeadingMarkup(index, teamName)}
 						<ul class="team-members">
 							${team.map((student, memberIndex) => {
-							const isLeader = this.useSeparateLeaderList
-								? this.isLeaderName(student)
-								: this.showLeaders && memberIndex === 0;
-							const leaderClass = isLeader ? 'team-leader' : '';
-							return `<li draggable="true" data-team="${index}" data-member="${memberIndex}" class="${leaderClass}"><span class="member-name">${student}</span>${isLeader ? '<span class="leader-badge">👑</span>' : ''}</li>`;
-						}).join('')}
+					const isLeader = this.useSeparateLeaderList
+						? this.isLeaderName(student)
+						: this.showLeaders && memberIndex === 0;
+					const leaderClass = isLeader ? 'team-leader' : '';
+					return `<li draggable="true" data-team="${index}" data-member="${memberIndex}" class="${leaderClass}"><span class="member-name">${student}</span>${isLeader ? '<span class="leader-badge">👑</span>' : ''}</li>`;
+				}).join('')}
 						</ul>
 					</div>
 				`;
