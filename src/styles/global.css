@@ -393,8 +393,9 @@ h1 {
 
 .btn-small {
     border: 1px solid rgb(209, 209, 209);
-    font-size: 14px;
+    font-size: .8rem;
     padding: 4px 6px;
+    line-height: .8rem;
 }
 
 .clear-container {
