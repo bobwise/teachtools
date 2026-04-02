@@ -118,3 +118,25 @@ footer p {
 .hidden {
     display: none;
 }
+
+.panel {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: fit-content;
+    border: 1px solid #e0e0e0;
+}
+
+.panel h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.panel label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
