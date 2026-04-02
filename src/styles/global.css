@@ -103,14 +103,14 @@ main {
     color: #666;
 }
 
-.breadcrumb li + li::before {
+.breadcrumb li+li::before {
     content: "/";
     margin-right: 0.5rem;
     color: #999;
 }
 
 .breadcrumb a {
-    color: var(--primary);
+    color: #333;
     text-decoration: none;
 }
 
@@ -129,13 +129,13 @@ header {
     padding: 0 !important;
 }
 
-nav {
+header nav {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
 }
 
-nav a {
+header nav a {
     text-decoration: none;
     color: #333;
     padding: 1.5rem 1.75rem;
@@ -143,7 +143,8 @@ nav a {
     transition: color 0.2s;
 }
 
-nav a:hover, nav a:focus-visible {
+header nav a:hover,
+header nav a:focus-visible {
     color: var(--blue-dark);
     text-decoration: underline;
     background-color: #e3f3ff;
@@ -205,7 +206,8 @@ h1 {
     color: var(--blue-dark);
     background-color: var(--blue-faint);
 
-    h2, h3 {
+    h2,
+    h3 {
         color: var(--blue-dark);
     }
 }
@@ -222,7 +224,7 @@ h1 {
 
 .panel.panel-green {
     border: 1px solid var(--green);
-    color: var(--green-dark); 
+    color: var(--green-dark);
     background-color: var(--green-faint);
 
     h2 {
@@ -346,4 +348,26 @@ h1 {
     justify-content: space-between;
     width: 120px;
     height: 24px;
+}
+
+.checkbox-container {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+.checkbox-container label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 0.75rem;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
 }

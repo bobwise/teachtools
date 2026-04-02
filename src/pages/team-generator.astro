@@ -1,6 +1,9 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
-import { DEFAULT_NAMES, DEFAULT_LEADER_NAMES } from "../constants/default-names.js";
+import {
+    DEFAULT_NAMES,
+    DEFAULT_LEADER_NAMES,
+} from "../constants/default-names.js";
 import "../styles/team-generator.css";
 
 const defaultNamesText = DEFAULT_NAMES.join("\n");
@@ -73,17 +76,11 @@ const defaultLeaderNamesText = DEFAULT_LEADER_NAMES.join("\n");
                 />
             </div>
 
-            <div
-                style="margin-bottom: 1.5rem; padding: 1rem; background: white; border-radius: 4px;"
-            >
-                <label
-                    for="includeLeaders"
-                    style="display: flex; align-items: center; cursor: pointer; margin: 0;"
-                >
+            <div class="checkbox-container">
+                <label for="includeLeaders">
                     <input
                         type="checkbox"
                         id="includeLeaders"
-                        style="margin-right: 0.75rem; cursor: pointer; width: 18px; height: 18px;"
                     />
                     <span>Include team leaders 👑</span>
                 </label>
@@ -112,7 +109,9 @@ const defaultLeaderNamesText = DEFAULT_LEADER_NAMES.join("\n");
                 <label for="leaderNames">Leader Names</label>
                 <textarea id="leaderNames" placeholder="Alice
 Bob
-Charlie...">{defaultLeaderNamesText}</textarea>
+Charlie..."
+                    >{defaultLeaderNamesText}</textarea
+                >
                 <p
                     style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;"
                 >
