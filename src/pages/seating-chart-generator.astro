@@ -1,6 +1,9 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
+import { DEFAULT_NAMES } from "../constants/default-names.js";
 import "../styles/seating-chart.css";
+
+const defaultNamesText = DEFAULT_NAMES.join("\n");
 ---
 
 <PageLayout title="Seating Chart Generator - TeachTools">
@@ -17,11 +20,7 @@ import "../styles/seating-chart.css";
 						id="clear">Clear</button
 					>
 				</div>
-				<textarea
-					id="names"
-					placeholder="Alice
-Bob
-Charlie..."></textarea>
+				<textarea id="names">{defaultNamesText}</textarea>
 			</div>
 
 			<div class="controls-section controls hidden">

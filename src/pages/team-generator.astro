@@ -1,6 +1,10 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
+import { DEFAULT_NAMES, DEFAULT_LEADER_NAMES } from "../constants/default-names.js";
 import "../styles/team-generator.css";
+
+const defaultNamesText = DEFAULT_NAMES.join("\n");
+const defaultLeaderNamesText = DEFAULT_LEADER_NAMES.join("\n");
 ---
 
 <PageLayout title="Team Generator - TeachTools">
@@ -10,10 +14,7 @@ import "../styles/team-generator.css";
             <h2>Team Setup</h2>
 
             <label for="studentNames">Names</label>
-            <textarea id="studentNames" placeholder="Alice
-Bob
-Charlie..."
-            ></textarea>
+            <textarea id="studentNames">{defaultNamesText}</textarea>
             <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">
                 <span id="studentCount">0 team members</span>
             </p>
@@ -97,8 +98,7 @@ Charlie..."
                 <label for="leaderNames">Leader Names</label>
                 <textarea id="leaderNames" placeholder="Alice
 Bob
-Charlie..."
-                ></textarea>
+Charlie...">{defaultLeaderNamesText}</textarea>
                 <p
                     style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;"
                 >
