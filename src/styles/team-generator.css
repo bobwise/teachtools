@@ -618,6 +618,10 @@
         grid-template-columns: 1fr;
     }
 
+    #teamsTip {
+        display: none !important;
+    }
+
     .panel {
         height: auto;
     }

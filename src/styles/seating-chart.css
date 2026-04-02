@@ -232,6 +232,10 @@ button:focus-visible {
         gap: 1rem;
     }
 
+    #dragLabel {
+        display: none !important;
+    }
+
     #chartWrapper {
         min-height: 280px;
     }
