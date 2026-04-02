@@ -4,14 +4,22 @@
 }
 
 .app {
-    max-width: 85%;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
+.seating-app {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
 .controls {
+    margin-top: 1rem;
     display: flex;
     justify-content: space-between;
-    gap: 8px;
+    gap: 1.5rem;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -50,8 +58,8 @@ textarea {
 
 #chartWrapper {
     padding: 8px;
-    margin-bottom: 100px;
     background-color: #fff;
+    min-height: 380px;
 }
 
 .chart {
@@ -142,7 +150,13 @@ textarea {
     gap: 8px;
     align-items: center;
     display: inline-flex;
-    margin-right: 64px;
+    margin-right: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .pod-option {
@@ -259,8 +273,7 @@ button:focus-visible {
     z-index: 10;
 }
 
-#dragLabel,
-#namesLabel {
+#dragLabel {
     font-size: 14px;
     color: #343434;
     margin-bottom: 6px;
@@ -283,6 +296,13 @@ button:focus-visible {
     display: none;
 }
 
-.panel {
-    margin-bottom: .75rem;
+@media (max-width: 900px) {
+    .seating-app {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    #chartWrapper {
+        min-height: 280px;
+    }
 }

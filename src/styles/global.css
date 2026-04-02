@@ -119,6 +119,12 @@ footer p {
     display: none;
 }
 
+h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.2rem;
+}
+
 .panel {
     background: #f9f9f9;
     padding: 1.5rem;

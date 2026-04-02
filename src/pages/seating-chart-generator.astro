@@ -1,116 +1,126 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
-import '../styles/global.css';
-import '../styles/seating-chart.css';	
+import "../styles/global.css";
+import "../styles/seating-chart.css";
 ---
 
 <PageLayout title="Seating Chart Generator - TeachTools">
-	<div class="app">
+	<h1>Seating Chart Generator</h1>
+	<div class="app seating-app">
 		<div class="panel">
-			<div id="clearContainer">
-				<label for="names" id="namesLabel">Names</label>
-				<button
-					type="button"
-					class="btn-tertiary btn-small hidden"
-					id="clear">Clear</button
-				>
-			</div>
-			<textarea
-				id="names"
-				placeholder="Annabelle, Bob, Charlie, Dianne..."></textarea>
-		</div>
-
-		<div class="panel controls hidden">
-			<div id="arrowsContainer">
-				<button class="numChange btn-tertiary" id="narrower"
-					>➡️⬅️</button
-				>
-				<button class="numChange btn-tertiary" id="wider">⬅️➡️</button>
-				<button class="numChange btn-tertiary" id="taller">⬇️</button>
-				<button class="numChange btn-tertiary" id="shorter">⬆️</button>
+			<h2>Chart Setup</h2>
+			<div class="names-section">
+				<div id="clearContainer">
+					<label for="names" id="namesLabel">Names</label>
+					<button
+						type="button"
+						class="btn-tertiary btn-small hidden"
+						id="clear">Clear</button
+					>
+				</div>
+				<textarea
+					id="names"
+					placeholder="Annabelle, Bob, Charlie, Dianne..."></textarea>
 			</div>
 
-			<div class="pod-size-toggle hidden" aria-label="Pod size">
-				<input id="rows" type="number" min="1" max="8" value="1" />
-				<input id="cols" type="number" min="1" max="8" value="1" />
-				<input id="podSize" type="hidden" value="1" />
-				<button
-					type="button"
-					role="button"
-					class="pod-option active btn-tertiary"
-					data-pod-size="1"
-					title="Pod size 1"
-				>
-					<div class="seat">
-						<div class="pod">
-							<div class="desk">
-								<div class="desk-seat" data-desk="0"></div>
+			<div class="controls-section controls hidden">
+				<div id="arrowsContainer">
+					<button class="numChange btn-tertiary" id="narrower"
+						>➡️⬅️</button
+					>
+					<button class="numChange btn-tertiary" id="wider"
+						>⬅️➡️</button
+					>
+					<button class="numChange btn-tertiary" id="taller"
+						>⬇️</button
+					>
+					<button class="numChange btn-tertiary" id="shorter"
+						>⬆️</button
+					>
+				</div>
+
+				<div class="pod-size-toggle hidden" aria-label="Pod size">
+					<input id="rows" type="number" min="1" max="8" value="1" />
+					<input id="cols" type="number" min="1" max="8" value="1" />
+					<input id="podSize" type="hidden" value="1" />
+					<button
+						type="button"
+						role="button"
+						class="pod-option active btn-tertiary"
+						data-pod-size="1"
+						title="Pod size 1"
+					>
+						<div class="seat">
+							<div class="pod">
+								<div class="desk">
+									<div class="desk-seat" data-desk="0"></div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</button>
-				<button
-					type="button"
-					role="button"
-					class="pod-option btn-tertiary"
-					data-pod-size="2"
-					title="Pod size 2"
-				>
-					<div class="seat">
-						<div class="pod">
-							<div class="desk">
-								<div class="desk-seat" data-desk="0"></div>
-							</div>
-							<div class="desk">
-								<div class="desk-seat" data-desk="1"></div>
-							</div>
-						</div>
-					</div>
-				</button>
-				<button
-					type="button"
-					role="button"
-					class="pod-option btn-tertiary"
-					data-pod-size="4"
-					title="Pod size 4"
-				>
-					<div class="seat">
-						<div class="pod pod-square">
-							<div class="desk">
-								<div class="desk-seat" data-desk="0"></div>
-							</div>
-							<div class="desk">
-								<div class="desk-seat" data-desk="1"></div>
-							</div>
-							<div class="desk">
-								<div class="desk-seat" data-desk="2"></div>
-							</div>
-							<div class="desk">
-								<div class="desk-seat" data-desk="3"></div>
+					</button>
+					<button
+						type="button"
+						role="button"
+						class="pod-option btn-tertiary"
+						data-pod-size="2"
+						title="Pod size 2"
+					>
+						<div class="seat">
+							<div class="pod">
+								<div class="desk">
+									<div class="desk-seat" data-desk="0"></div>
+								</div>
+								<div class="desk">
+									<div class="desk-seat" data-desk="1"></div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</button>
-			</div>
-			<div>
-				<button
-					type="button"
-					class="hidden btn-tertiary"
-					id="sort"
-					title="Sort">🔤 Sort</button
-				>
-				<button
-					type="button"
-					class="hidden btn-tertiary"
-					id="shuffle"
-					title="Shuffle">🔀 Shuffle</button
-				>
-				<button
-					type="button"
-					class="hidden btn-secondary"
-					id="print"
-					title="Print">🖨️ Print</button
-				>
+					</button>
+					<button
+						type="button"
+						role="button"
+						class="pod-option btn-tertiary"
+						data-pod-size="4"
+						title="Pod size 4"
+					>
+						<div class="seat">
+							<div class="pod pod-square">
+								<div class="desk">
+									<div class="desk-seat" data-desk="0"></div>
+								</div>
+								<div class="desk">
+									<div class="desk-seat" data-desk="1"></div>
+								</div>
+								<div class="desk">
+									<div class="desk-seat" data-desk="2"></div>
+								</div>
+								<div class="desk">
+									<div class="desk-seat" data-desk="3"></div>
+								</div>
+							</div>
+						</div>
+					</button>
+				</div>
+				<div class="action-buttons">
+					<button
+						type="button"
+						class="hidden btn-tertiary"
+						id="sort"
+						title="Sort">🔤 Sort</button
+					>
+					<button
+						type="button"
+						class="hidden btn-tertiary"
+						id="shuffle"
+						title="Shuffle">🔀 Shuffle</button
+					>
+					<button
+						type="button"
+						class="hidden btn-secondary"
+						id="print"
+						title="Print">🖨️ Print</button
+					>
+				</div>
 			</div>
 		</div>
 
@@ -120,15 +130,6 @@ import '../styles/seating-chart.css';
 				<div id="boardLabel">Board</div>
 				<div id="chart" class="chart"></div>
 			</div>
-		</div>
-
-		<div class="align-right">
-			<button
-				type="button"
-				class="hidden btn-secondary print-bottom"
-				id="printBottom"
-				title="Print">🖨️ Print</button
-			>
 		</div>
 	</div>
 
