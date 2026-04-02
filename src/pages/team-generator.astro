@@ -16,7 +16,16 @@ const defaultLeaderNamesText = DEFAULT_LEADER_NAMES.join("\n");
         <div class="panel">
             <h2>Team Setup</h2>
 
-            <label for="studentNames">Names</label>
+            <div class="clear-container">
+                <label for="studentNames">Names</label>
+                <button
+                    type="button"
+                    class="btn-tertiary btn-small hidden"
+                    id="clear"
+                >
+                    Clear
+                </button>
+            </div>
             <textarea id="studentNames">{defaultNamesText}</textarea>
             <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">
                 <span id="studentCount">0 team members</span>

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const namesInput = document.getElementById('names');
     const pickNextButton = document.getElementById('generateTeamsBtn');
+    const clearButton = document.getElementById('clear');
     const pickerResult = document.getElementById('pickerResult');
     const noRepeatsCheckbox = document.getElementById('includeLeaders');
 
@@ -20,6 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const createSignature = (names) => names.join('|');
+
+    const toggleClearButton = () => {
+        if (!clearButton) {
+            return;
+        }
+
+        const hasNames = (namesInput.value || '').trim().length > 0;
+        clearButton.classList.toggle('hidden', !hasNames);
+    };
 
     const resetNoRepeatPoolIfNeeded = (names) => {
         const currentSignature = createSignature(names);
@@ -48,6 +58,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const randomIndex = Math.floor(Math.random() * pool.length);
         return pool[randomIndex];
     };
+
+    if (clearButton) {
+        clearButton.addEventListener('click', () => {
+            namesInput.value = '';
+            remainingNames = [];
+            lastNamesSignature = '';
+            lastSelectedName = '';
+            pickerResult.classList.add('hidden');
+            pickerResult.textContent = '';
+            toggleClearButton();
+            namesInput.focus();
+        });
+    }
+
+    namesInput.addEventListener('input', () => {
+        toggleClearButton();
+    });
 
     pickNextButton.addEventListener('click', () => {
         const names = parseNames();
@@ -80,4 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
         pickerResult.classList.remove('hidden');
         pickerResult.textContent = selectedName;
     });
+
+    toggleClearButton();
 });

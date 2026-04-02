@@ -222,3 +222,10 @@ h1 {
     font-size: 14px;
     padding: 4px 6px;
 }
+
+.clear-container {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 120px;
+    height: 24px;
+}

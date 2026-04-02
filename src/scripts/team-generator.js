@@ -27,6 +27,7 @@ class TeamGenerator {
 		const namesInput = document.getElementById('studentNames');
 		const generateBtn = document.getElementById('generateTeamsBtn');
 		const shuffleBtn = document.getElementById('shuffleBtn');
+		const clearBtn = document.getElementById('clear');
 		const modeRadios = document.querySelectorAll('input[name="teamMode"]');
 		const groupSizeInput = document.getElementById('groupSize');
 		const numGroupsInput = document.getElementById('numGroups');
@@ -35,6 +36,15 @@ class TeamGenerator {
 		const useSeparateLeaderListCheckbox = document.getElementById('useSeparateLeaderList');
 		const leaderNamesContainer = document.getElementById('leaderNamesContainer');
 		const leaderNamesInput = document.getElementById('leaderNames');
+
+		const toggleClearButton = () => {
+			if (!clearBtn) {
+				return;
+			}
+
+			const hasNames = (namesInput.value || '').trim().length > 0;
+			clearBtn.classList.toggle('hidden', !hasNames);
+		};
 
 		// Toggle leaders checkbox
 		if (leadersCheckbox) {
@@ -99,7 +109,15 @@ class TeamGenerator {
 		// Generate teams on input change
 		namesInput.addEventListener('input', () => {
 			this.parseStudents();
+			toggleClearButton();
 		});
+
+		if (clearBtn) {
+			clearBtn.addEventListener('click', () => {
+				this.clearAll();
+				toggleClearButton();
+			});
+		}
 
 		generateBtn.addEventListener('click', () => {
 			this.generateTeams();
@@ -127,6 +145,87 @@ class TeamGenerator {
 		if (leaderNamesContainer) {
 			leaderNamesContainer.style.display = 'none';
 		}
+
+		toggleClearButton();
+	}
+
+	clearAll() {
+		const namesInput = document.getElementById('studentNames');
+		const leaderNamesInput = document.getElementById('leaderNames');
+		const groupSizeInput = document.getElementById('groupSize');
+		const numGroupsInput = document.getElementById('numGroups');
+		const modeCountInput = document.getElementById('modeCount');
+		const leadersCheckbox = document.getElementById('includeLeaders');
+		const separateLeaderControls = document.getElementById('separateLeaderControls');
+		const useSeparateLeaderListCheckbox = document.getElementById('useSeparateLeaderList');
+		const leaderNamesContainer = document.getElementById('leaderNamesContainer');
+		const teamsContainer = document.getElementById('teamsContainer');
+		const teamsWrapper = document.getElementById('teamsWrapper');
+		const teamsTip = document.getElementById('teamsTip');
+
+		if (namesInput) {
+			namesInput.value = '';
+			namesInput.focus();
+		}
+
+		if (leaderNamesInput) {
+			leaderNamesInput.value = '';
+		}
+
+		if (groupSizeInput) {
+			groupSizeInput.value = '';
+			groupSizeInput.disabled = true;
+		}
+
+		if (numGroupsInput) {
+			numGroupsInput.value = '4';
+			numGroupsInput.disabled = false;
+		}
+
+		if (modeCountInput) {
+			modeCountInput.checked = true;
+		}
+
+		if (leadersCheckbox) {
+			leadersCheckbox.checked = false;
+		}
+
+		if (useSeparateLeaderListCheckbox) {
+			useSeparateLeaderListCheckbox.checked = false;
+			useSeparateLeaderListCheckbox.disabled = true;
+		}
+
+		if (separateLeaderControls) {
+			separateLeaderControls.style.display = 'none';
+		}
+
+		if (leaderNamesContainer) {
+			leaderNamesContainer.style.display = 'none';
+		}
+
+		if (teamsTip) {
+			teamsTip.style.display = 'none';
+		}
+
+		if (teamsContainer) {
+			teamsContainer.innerHTML = '<div class="empty-state">Generate teams to see results</div>';
+		}
+
+		if (teamsWrapper) {
+			teamsWrapper.style.display = 'none';
+		}
+
+		this.students = [];
+		this.leaderNames = [];
+		this.teams = [];
+		this.teamNames = {};
+		this.draggedFrom = null;
+		this.showLeaders = false;
+		this.useSeparateLeaderList = false;
+
+		this.updateStudentCount();
+		this.parseLeaderNames();
+		this.clearMessages();
 	}
 
 	parseStudents() {

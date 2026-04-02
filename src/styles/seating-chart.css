@@ -179,13 +179,6 @@ button:focus-visible {
     outline-offset: 2px;
 }
 
-#clearContainer {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 120px;
-    height: 24px;
-}
-
 .controls button[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
