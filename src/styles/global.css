@@ -32,14 +32,14 @@
     --yellow-light: #fff3cd;
     --yellow: #ffc107;
     --yellow-medium: #ffb300;
-    --yellow-dark: #e0a800;
+    --yellow-dark: #7c5d00;
 
     /* Green Colors (lightest to darkest: faint, light, base, medium, dark) */
     --green-faint: #d4edda;
     --green-light: #a6d9a8;
     --green: #5cb85c;
     --green-medium: #4cae4c;
-    --green-dark: #449d44;
+    --green-dark: #255825;
 
     /* Purple Colors (lightest to darkest: faint, light, base, medium, dark) */
     --purple-faint: #ebd5fa;
@@ -113,6 +113,11 @@ footer {
 footer p {
     color: #666;
     margin: 0;
+}
+
+footer h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 .hidden {
