@@ -253,12 +253,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (!w) return alert('Popup blocked: allow popups to use print.');
 		const style = `<style>
 
+@font-face {
+	font-family: "Open Sans";
+	src: url("/fonts/OpenSans-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Open Sans";
+	src: url("/fonts/OpenSans-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
+}
+
 * {
     box-sizing: border-box
 }
 
 body {
-    font-family: system-ui, Segoe UI, Roboto, Helvetica, Arial;
+	font-family: "Open Sans", Arial, sans-serif;
     margin: 0;
     padding: 20px;
     background: #ffffff;

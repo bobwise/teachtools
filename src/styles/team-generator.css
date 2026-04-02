@@ -14,8 +14,6 @@
     margin-top: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-family: monospace;
-    font-size: 0.95rem;
     resize: vertical;
     min-height: 200px;
 }
