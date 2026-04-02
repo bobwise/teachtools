@@ -1,13 +1,3 @@
-:root {
-    --highlight: #61b4ef;
-
-}
-
-.app {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 .seating-app {
     display: grid;
     grid-template-columns: 320px 1fr;
@@ -182,71 +172,11 @@ textarea {
 
 button {
     padding: 8px 10px;
-    border-radius: 6px;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
 }
 
 button:focus-visible {
     outline: 2px solid var(--highlight);
     outline-offset: 2px;
-}
-
-.btn-primary {
-    background: var(--primary);
-    border: 2px solid var(--primary);
-    font-weight: 700;
-}
-
-.btn-primary:hover {
-    background: var(--primary-medium);
-}
-
-.btn-primary:active {
-    background: var(--primary-dark);
-}
-
-.btn-secondary {
-    background: white;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    font-weight: 500;
-}
-
-.btn-secondary:hover {
-    background-color: #f0f7ff;
-    color: var(--primary-medium);
-    border-color: var(--primary-medium);
-}
-
-.btn-secondary:active {
-    color: var(--primary-medium);
-    border-color: var(--primary-medium);
-}
-
-.btn-tertiary {
-    border: 2px solid rgb(209, 209, 209);
-    background-color: rgb(255, 255, 255);
-    color: rgb(55, 55, 55);
-}
-
-.btn-tertiary:hover {
-    background-color: rgb(250, 250, 250);
-    border-color: rgb(167, 167, 167);
-}
-
-.btn-tertiary:focus-visible {
-    background-color: rgb(250, 250, 250);
-    border-color: rgb(167, 167, 167);
-}
-
-.btn-small {
-    border: 1px solid rgb(209, 209, 209);
-    font-size: 14px;
-    padding: 4px 6px;
 }
 
 #clearContainer {

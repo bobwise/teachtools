@@ -1,7 +1,37 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
+import "../styles/random-picker.css";
 ---
 
 <PageLayout title="Random Student Picker - TeachTools">
-    <div class="app">Coming soon...</div>
+    <h1>Random Student Picker</h1>
+    <div class="app random-picker-app">
+        <div class="panel">
+            <div class="names-section">
+                <div id="clearContainer">
+                    <label for="names" id="namesLabel">Names</label>
+                    <button
+                        type="button"
+                        class="btn-tertiary btn-small hidden"
+                        id="clear">Clear</button
+                    >
+                </div>
+                <textarea
+                    id="names"
+                    placeholder="Alice
+Bob
+Charlie..."></textarea>
+            </div>
+
+            <div class="controls">
+                <button type="button" class="btn-primary" id="generateTeamsBtn">
+                    Pick Next
+                </button>
+            </div>
+        </div>
+
+        <div id="pickerResult" class="panel hidden" role="main"></div>
+    </div>
+
+    <!-- <script src="../scripts/seating-app.js"></script> -->
 </PageLayout>

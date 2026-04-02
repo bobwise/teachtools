@@ -1,6 +1,5 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
-import "../styles/global.css";
 import "../styles/seating-chart.css";
 ---
 
@@ -20,7 +19,9 @@ import "../styles/seating-chart.css";
 				</div>
 				<textarea
 					id="names"
-					placeholder="Annabelle, Bob, Charlie, Dianne..."></textarea>
+					placeholder="Alice
+Bob
+Charlie..."></textarea>
 			</div>
 
 			<div class="controls-section controls hidden">
@@ -110,13 +111,13 @@ import "../styles/seating-chart.css";
 					>
 					<button
 						type="button"
-						class="hidden btn-tertiary"
+						class="hidden btn-primary"
 						id="shuffle"
 						title="Shuffle">🔀 Shuffle</button
 					>
 					<button
 						type="button"
-						class="hidden btn-secondary"
+						class="hidden btn-tertiary"
 						id="print"
 						title="Print">🖨️ Print</button
 					>
