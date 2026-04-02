@@ -6,9 +6,23 @@ import "../styles/global.css";
 
 interface Props {
 	title: string;
+	description?: string;
+	image?: string;
+	type?: "website" | "article";
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = "TeachTools is a free library of interactive and educational tools for teachers, professors, and team leaders. TeachTools offers a Seating Chart Generator, a Team Generator, and a Random Name Picker. All tools on TeachTools are free to use, no payment or login required.",
+	image = "/favicon.ico",
+	type = "website",
+} = Astro.props;
+
+const canonicalUrl = Astro.site
+	? new URL(Astro.url.pathname, Astro.site).toString()
+	: Astro.url.toString();
+const imageUrl = new URL(image, canonicalUrl).toString();
+
 ---
 
 <!doctype html>
@@ -19,6 +33,22 @@ const { title } = Astro.props;
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="robots" content="index,follow" />
+		<link rel="canonical" href={canonicalUrl} />
+
+		<meta property="og:type" content={type} />
+		<meta property="og:site_name" content="TeachTools" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={imageUrl} />
+		<meta property="og:locale" content="en_US" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
 		<title>{title}</title>
 	</head>
 	<body>
