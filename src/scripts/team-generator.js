@@ -277,10 +277,10 @@ class TeamGenerator {
 	getTeamHeadingMarkup(teamIndex, teamName) {
 		const showEditAffordance = this.isDefaultTeamName(teamIndex, teamName);
 		return `
-			<h4 class="team-name${showEditAffordance ? ' team-name-default' : ''}" data-team-index="${teamIndex}" data-team-name="${teamName}">
+			<h3 class="team-name${showEditAffordance ? ' team-name-default' : ''}" data-team-index="${teamIndex}" data-team-name="${teamName}">
 				<span class="team-name-text">${teamName}</span>
 				${showEditAffordance ? '<span class="team-name-edit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92 2.33H5v-.92l9.06-9.06.92.92L5.92 19.58zM20.71 7.04a.996.996 0 0 0 0-1.41L18.37 3.29a.996.996 0 1 0-1.41 1.41L19.3 7.04a.996.996 0 0 0 1.41 0z"/></svg></span>' : ''}
-			</h4>
+			</h3>
 		`;
 	}
 

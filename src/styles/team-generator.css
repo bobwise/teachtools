@@ -85,7 +85,7 @@
     border-color: var(--blue);
 }
 
-.team:nth-child(1) h4 {
+.team:nth-child(1) h3 {
     color: var(--blue);
 }
 
@@ -107,7 +107,7 @@
     border-color: var(--red);
 }
 
-.team:nth-child(2) h4 {
+.team:nth-child(2) h3 {
     color: var(--red-dark);
 }
 
@@ -129,7 +129,7 @@
     border-color: var(--green);
 }
 
-.team:nth-child(3) h4 {
+.team:nth-child(3) h3 {
     color: var(--green-dark);
 }
 
@@ -151,7 +151,7 @@
     border-color: var(--yellow);
 }
 
-.team:nth-child(4) h4 {
+.team:nth-child(4) h3 {
     color: var(--yellow-dark);
 }
 
@@ -173,7 +173,7 @@
     border-color: var(--purple);
 }
 
-.team:nth-child(5) h4 {
+.team:nth-child(5) h3 {
     color: var(--purple);
 }
 
@@ -195,7 +195,7 @@
     border-color: var(--pink);
 }
 
-.team:nth-child(6) h4 {
+.team:nth-child(6) h3 {
     color: var(--pink);
 }
 
@@ -217,7 +217,7 @@
     border-color: var(--orange);
 }
 
-.team:nth-child(7) h4 {
+.team:nth-child(7) h3 {
     color: var(--orange-dark);
 }
 
@@ -249,7 +249,7 @@
     border-color: var(--blue);
 }
 
-.team:nth-child(8n+1) h4 {
+.team:nth-child(8n+1) h3 {
     color: var(--blue);
 }
 
@@ -275,7 +275,7 @@
     border-color: var(--red);
 }
 
-.team:nth-child(8n+2) h4 {
+.team:nth-child(8n+2) h3 {
     color: var(--red-dark);
 }
 
@@ -301,7 +301,7 @@
     border-color: var(--green);
 }
 
-.team:nth-child(8n+3) h4 {
+.team:nth-child(8n+3) h3 {
     color: var(--green-dark);
 }
 
@@ -340,7 +340,7 @@
     background-color: rgba(255, 193, 7, 0.05) !important;
 }
 
-.team:nth-child(8n+4) h4 {
+.team:nth-child(8n+4) h3 {
     color: var(--yellow-dark);
 }
 
@@ -353,7 +353,7 @@
     border-color: var(--purple);
 }
 
-.team:nth-child(8n+5) h4 {
+.team:nth-child(8n+5) h3 {
     color: var(--purple);
 }
 
@@ -379,7 +379,7 @@
     border-color: var(--pink);
 }
 
-.team:nth-child(8n+6) h4 {
+.team:nth-child(8n+6) h3 {
     color: var(--pink);
 }
 
@@ -405,7 +405,7 @@
     border-color: var(--orange);
 }
 
-.team:nth-child(8n+7) h4 {
+.team:nth-child(8n+7) h3 {
     color: var(--orange-dark);
 }
 
@@ -426,7 +426,7 @@
     border-color: var(--orange);
 }
 
-.team h4 {
+.team h3 {
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 1.1rem;
