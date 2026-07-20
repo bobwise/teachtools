@@ -23,6 +23,7 @@ const canonicalUrl = Astro.site
 	? new URL(Astro.url.pathname, Astro.site).toString()
 	: Astro.url.toString();
 const imageUrl = new URL(image, canonicalUrl).toString();
+const isHomepage = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -63,10 +64,12 @@ const imageUrl = new URL(image, canonicalUrl).toString();
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={imageUrl} />
 
-		<script
-			async
-			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2754098290061350"
-			crossorigin="anonymous"></script>
+		{!isHomepage && (
+			<script
+				async
+				src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2754098290061350"
+				crossorigin="anonymous"></script>
+		)}
 
 		<title>{title}</title>
 	</head>
