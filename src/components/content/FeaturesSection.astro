@@ -1,0 +1,18 @@
+---
+const { headingId, title, intro, items } = Astro.props;
+---
+
+<section class="content-section" aria-labelledby={headingId}>
+    <div class="section-header">
+        <h2 id={headingId}>{title}</h2>
+        <p>{intro}</p>
+    </div>
+    <ul class="card-list">
+        {items.map((item) => (
+            <li class="info-card">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+            </li>
+        ))}
+    </ul>
+</section>

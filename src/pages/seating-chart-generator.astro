@@ -1,6 +1,11 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import { DEFAULT_NAMES } from "../constants/default-names.js";
+import HowToSection from "../components/content/HowToSection.astro";
+import FeaturesSection from "../components/content/FeaturesSection.astro";
+import WhenToUseSection from "../components/content/WhenToUseSection.astro";
+import FaqSection from "../components/content/FaqSection.astro";
+import { seatingChartContent } from "../data/seating-chart-content.js";
 import "../styles/seating-chart.css";
 
 const defaultNamesText = DEFAULT_NAMES.join("\n");
@@ -27,21 +32,6 @@ const defaultNamesText = DEFAULT_NAMES.join("\n");
 			</div>
 
 			<div class="controls-section controls hidden">
-				<div id="arrowsContainer">
-					<button class="numChange btn-tertiary" id="narrower"
-						>➡️⬅️</button
-					>
-					<button class="numChange btn-tertiary" id="wider"
-						>⬅️➡️</button
-					>
-					<button class="numChange btn-tertiary" id="taller"
-						>⬇️</button
-					>
-					<button class="numChange btn-tertiary" id="shorter"
-						>⬆️</button
-					>
-				</div>
-
 				<div class="pod-size-toggle hidden">
 					<input id="rows" type="number" min="1" max="8" value="1" />
 					<input id="cols" type="number" min="1" max="8" value="1" />
@@ -104,6 +94,22 @@ const defaultNamesText = DEFAULT_NAMES.join("\n");
 						</div>
 					</button>
 				</div>
+
+				<div id="arrowsContainer">
+					<button class="numChange btn-tertiary" id="narrower"
+						>➡️⬅️</button
+					>
+					<button class="numChange btn-tertiary" id="wider"
+						>⬅️➡️</button
+					>
+					<button class="numChange btn-tertiary" id="taller"
+						>⬇️</button
+					>
+					<button class="numChange btn-tertiary" id="shorter"
+						>⬆️</button
+					>
+				</div>
+
 				<div class="action-buttons">
 					<button
 						type="button"
@@ -128,13 +134,40 @@ const defaultNamesText = DEFAULT_NAMES.join("\n");
 		</div>
 
 		<div id="chartWrapper" class="panel hidden" role="main">
-			<div id="dragLabel" class="help-text">Tip: Drag and drop to rearrange desks.</div>
+			<div id="dragLabel" class="help-text">
+				Tip: Drag and drop to rearrange desks.
+			</div>
 			<div id="printArea">
 				<div id="boardLabel">Board</div>
 				<div id="chart" class="chart"></div>
 			</div>
 		</div>
 	</div>
-
+	<div class="page-content">
+		<HowToSection
+			headingId={seatingChartContent.howTo.headingId}
+			title={seatingChartContent.howTo.title}
+			intro={seatingChartContent.howTo.intro}
+			items={seatingChartContent.howTo.items}
+		/>
+		<FeaturesSection
+			headingId={seatingChartContent.features.headingId}
+			title={seatingChartContent.features.title}
+			intro={seatingChartContent.features.intro}
+			items={seatingChartContent.features.items}
+		/>
+		<WhenToUseSection
+			headingId={seatingChartContent.whenToUse.headingId}
+			title={seatingChartContent.whenToUse.title}
+			intro={seatingChartContent.whenToUse.intro}
+			items={seatingChartContent.whenToUse.items}
+		/>
+		<FaqSection
+			headingId={seatingChartContent.faq.headingId}
+			title={seatingChartContent.faq.title}
+			intro={seatingChartContent.faq.intro}
+			items={seatingChartContent.faq.items}
+		/>
+	</div>
 	<script src="../scripts/seating-app.js"></script>
 </PageLayout>

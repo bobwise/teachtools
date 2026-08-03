@@ -375,6 +375,38 @@ body {
 		w.document.close();
 	}
 
+	function initializeFaqAccordion() {
+		const items = document.querySelectorAll('.faq-item');
+
+		items.forEach((item, index) => {
+			const button = item.querySelector('.faq-question');
+			const answer = item.querySelector('.faq-answer');
+
+			if (!button || !answer) {
+				return;
+			}
+
+			const answerId = answer.id || `faq-answer-${index + 1}`;
+			answer.id = answerId;
+			button.id = button.id || `faq-button-${index + 1}`;
+			button.setAttribute('aria-controls', answerId);
+			button.addEventListener('click', () => {
+				const isOpen = item.classList.toggle('is-open');
+				button.setAttribute('aria-expanded', String(isOpen));
+
+				items.forEach((otherItem) => {
+					if (otherItem !== item) {
+						otherItem.classList.remove('is-open');
+						const otherButton = otherItem.querySelector('.faq-question');
+						if (otherButton) {
+							otherButton.setAttribute('aria-expanded', 'false');
+						}
+					}
+				});
+			});
+		});
+	}
+
 	// wire up buttons
 	shuffleBtn.addEventListener('click', () => { shuffleSeats(); renderChart(parseInt(rowsInput.value, 10), parseInt(colsInput.value, 10), parseInt(podInput.value, 10)); });
 	printBtn.addEventListener('click', doPrint);
@@ -422,6 +454,10 @@ body {
 		doClear();
 		// namesInput.value = 'Soren-Alexis Vale Mercer\nRemy Clarke\nBo Quinn Hale\nAvery-Jules Mercer Cross\nLior Skye\nCassian River Thorn Vale\nAri Sol Carter\nSkyler Élan Cross Vale\nZee Rowan Hale\nHollis Alexander Wren Vale\nPax Mercer\nFinley-Rowan Ashford Vale\nIo Skye Carter\nMarlowe Seraphine Vale Cross\nRen Hale\nTatum Blake Mercer\nLux Vale\nEmberlynn Quinn Hale Cross\nAsh Carter\nDakota-Rain Mercer Vale\nElio Skye\nBriar Alexandria Skye Vale\nKit Hale\nZephyr Orion Vale Cross\nSol Mercer\nAvery Noël Carter\nOnyx Vale\nShiloh Evander Cross Vale\nRue Mercer\nLyric Hale';
 	}
+	// wire accordions
+	initializeFaqAccordion();
+	
 	// generate initial chart based on prefilled names and default inputs
 	doGo();
+
 });

@@ -1,0 +1,36 @@
+---
+const { headingId, title, intro, items } = Astro.props;
+---
+
+<section class="content-section faq-section" aria-labelledby={headingId}>
+    <div class="section-header">
+        <h2 id={headingId}>{title}</h2>
+        <p>{intro}</p>
+    </div>
+    <div class="faq-list">
+        {items.map((item, index) => (
+            <article class="faq-item">
+                <h3>
+                    <button
+                        class="faq-question"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls={`faq-answer-${index + 1}`}
+                        id={`faq-button-${index + 1}`}
+                    >
+                        <span>{item.question}</span>
+                        <span class="faq-icon" aria-hidden="true">+</span>
+                    </button>
+                </h3>
+                <div
+                    class="faq-answer"
+                    id={`faq-answer-${index + 1}`}
+                    role="region"
+                    aria-labelledby={`faq-button-${index + 1}`}
+                >
+                    <p>{item.answer}</p>
+                </div>
+            </article>
+        ))}
+    </div>
+</section>

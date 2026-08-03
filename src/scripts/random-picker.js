@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentSignature !== lastNamesSignature) {
             remainingNames = [];
             lastNamesSignature = currentSignature;
-			if (!names.includes(lastSelectedName)) {
-				lastSelectedName = '';
-			}
+            if (!names.includes(lastSelectedName)) {
+                lastSelectedName = '';
+            }
         }
     };
 
@@ -58,6 +58,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const randomIndex = Math.floor(Math.random() * pool.length);
         return pool[randomIndex];
     };
+
+    const initializeFaqAccordion = () => {
+        const items = document.querySelectorAll('.faq-item');
+
+        items.forEach((item, index) => {
+            const button = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+
+            if (!button || !answer) {
+                return;
+            }
+
+            const answerId = answer.id || `faq-answer-${index + 1}`;
+            answer.id = answerId;
+            button.id = button.id || `faq-button-${index + 1}`;
+            button.setAttribute('aria-controls', answerId);
+            button.addEventListener('click', () => {
+                const isOpen = item.classList.toggle('is-open');
+                button.setAttribute('aria-expanded', String(isOpen));
+
+                items.forEach((otherItem) => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('is-open');
+                        const otherButton = otherItem.querySelector('.faq-question');
+                        if (otherButton) {
+                            otherButton.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            });
+        });
+    }
 
     if (clearButton) {
         clearButton.addEventListener('click', () => {
@@ -109,4 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     toggleClearButton();
+
+    initializeFaqAccordion();
 });
