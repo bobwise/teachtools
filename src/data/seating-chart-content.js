@@ -65,6 +65,16 @@ export const seatingChartContent = {
                 description:
                     "Use this tool so that students can be divided into balanced teams for classroom activities.",
             },
+            {
+                title: "Event organization",
+                description:
+                    "Use this tool to create seating arrangements for events, ensuring that guests are seated in a balanced and organized manner.",
+            },
+            {
+                title: "Share seating chart with others",
+                description:
+                    "Once you've created your seating chart, you can share it with others by printing it or saving it as a PDF.",
+            },
         ],
     },
     faq: {
@@ -76,7 +86,28 @@ export const seatingChartContent = {
             {
                 question: "How much does it cost to use the Seating Chart Generator?",
                 answer:
-                    "The Random Team Generator is always free to use. No credit card or payment information is required to use this tool.",
+                    "The Seating Chart Generator is always free to use. No credit card or payment information is required to use this tool.",
+            },
+            {
+                question:
+                    "Do I need to login or create a username and password to use the Seating Chart Generator?",
+                answer:
+                    "We do not require a username or password to use the Seating Chart Generator. No login is required.",
+            },
+            {
+                question: "How many desks can I add to a seating chart?",
+                answer:
+                    "There is no limit to the number of desks you can add to your seating chart, however, the chart will become difficult to read when it becomes too large. Try increasing the number of desks in each pod to make the chart more legible.",
+            },
+            {
+                question: "How do I save my seating chart?",
+                answer:
+                    "You can click the Print button to print your seating chart or save it as a PDF. Then you can distribute or make copies of the list as needed.",
+            },
+            {
+                question: "Is my data secure?",
+                answer:
+                    "Teach Tools does not store any of your information. None of the information that you enter into the Seating Chart Generator will be stored any longer than is needed to generate the seating chart.",
             },
         ],
     },
